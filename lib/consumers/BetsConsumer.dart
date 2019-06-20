@@ -12,18 +12,10 @@ abstract class BetsConsumer extends StatelessWidget {
   });
 
   Widget build(BuildContext context) {
-    // Bets bets = Provider.of<Bets>(context);
-    // List<Bet> betsArray = isCompletedList ? bets.completedBets : bets.allBets;
+    Bets bets = Provider.of<Bets>(context);
+    List<Bet> betsArray = isCompletedList ? bets.completedBets : bets.allBets;
 
-    // return renderChild(context, betsArray[betIndex], bets);
-
-    return Consumer<Bets>(
-      builder: (context, bets, child) {
-        List<Bet> betsArray = isCompletedList ? bets.completedBets : bets.allBets;
-
-        return renderChild(context, betsArray[betIndex], bets);
-      },
-    );
+    return renderChild(context, betsArray[betIndex], bets);
   }
 
   Widget renderChild(BuildContext context, Bet bet, Bets bets);
