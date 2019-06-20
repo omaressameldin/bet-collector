@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/providers/BetProvider.dart';
+import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
-import 'package:provider/provider.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class BetsList extends StatelessWidget {
+class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
   final bool isCompletedList;
 
 
@@ -26,25 +28,27 @@ class BetsList extends StatelessWidget {
     @required this.isCompletedList,
   });
 
-  Widget _buildSuggestions(Bets bets) {
-    List<Bet> betsToShow = this.isCompletedList ? bets.completedBets : bets.allBets;
+  Widget _buildSuggestions(BuildContext context) {
+    List<Bet> betsToShow = betsList(context, this.isCompletedList);
     return ListView.builder(
         padding: const EdgeInsets.all(5.0),
-        itemBuilder: /*1*/ (context, i) {
+        itemBuilder: (context, i) {
           if (i < betsToShow.length) {
-            return BetCard(betIndex: i, isCompletedList: this.isCompletedList);
+            return provideBet(
+              betsToShow[i],
+              BetCard(betIndex: i, isCompletedList: this.isCompletedList)
+            );
           }
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    final bets = Provider.of<Bets>(context);
-    return _buildSuggestions(bets);
+    return _buildSuggestions(context);
   }
 }
 
-class NavigationState extends State<Navigation> {
+class NavigationState extends State<Navigation> with BetsProvider {
   int _currentIndex = 0;
   final List<Widget> _children = <Widget>[
     BetsList(isCompletedList: false),
@@ -54,34 +58,30 @@ class NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     Bets bets = Bets();
-    return
-      ChangeNotifierProvider(
-        builder: (context) => bets,
-        child: Scaffold(
-        appBar: AppBar(
-          elevation: 8.0,
-          title: Text('Long Term Bets'),
-          backgroundColor: AppColors.primary,
-        ),
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 8.0,
-          currentIndex: _currentIndex,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.secondary,
-          onTap: onTabTapped,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.list),
-              title: new Text('All'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.favorite),
-              title: new Text('Favorites'),
-            )
-          ],
-        ),
-      )
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 8.0,
+        title: Text('Long Term Bets'),
+        backgroundColor: AppColors.primary,
+      ),
+      body: provideBets(bets, _children[_currentIndex]),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 8.0,
+        currentIndex: _currentIndex,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.secondary,
+        onTap: onTabTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.list),
+            title: new Text('All'),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.favorite),
+            title: new Text('Favorites'),
+          )
+        ],
+      ),
     );
   }
 
