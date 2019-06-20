@@ -16,4 +16,11 @@ mixin WidgetHelper {
           child: child,
       );
   }
+
+  showBottomModal(BuildContext context, Widget child) {
+    showBottomSheet(
+      context: context,
+      builder: (BuildContext bc) => child,
+    );
+  }
 }
