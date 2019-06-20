@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:long_term_bets/abstracts/BetsConsumer.dart';
+import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCardInfo.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
-import 'package:long_term_bets/wrappers/BottomModal.dart';
 import 'package:provider/provider.dart';
 
 class BetCard extends BetsConsumer with WidgetHelper {
@@ -56,11 +55,10 @@ class BetCard extends BetsConsumer with WidgetHelper {
               padding: EdgeInsets.all(0),
               shape: CircleBorder(side: BorderSide.none),
               child: FlatButton(
-                onPressed: ()  {
-                  return BottomModal(
-                  context: context,
-                  child: BetPopUp(betIndex: betIndex, isCompletedList: this.isCompletedList)
-                );},
+                onPressed: () => showBottomModal(
+                  context,
+                  BetPopUp(betIndex: betIndex, isCompletedList: this.isCompletedList),
+                ),
                 child: Icon(Icons.keyboard_arrow_up, color: _iconColor, size: 30.0),
               )
             )

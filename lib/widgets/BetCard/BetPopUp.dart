@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:long_term_bets/abstracts/BetsConsumer.dart';
+import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
