@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 
 mixin BetProvider {
   Widget provideBet(Bet bet, BetConsumer child) {
-    return ChangeNotifierProvider(
-      builder: (_) => bet,
+    return ChangeNotifierProvider.value(
+      value: bet,
       child: child
     );
   }
