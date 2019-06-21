@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:long_term_bets/consumers/BetConsumer.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 
-class BetPopUp extends BetsConsumer {
-  BetPopUp({@required int betIndex, @required bool isCompletedList}): super(
-    betIndex: betIndex,
-    isCompletedList: isCompletedList,
-  );
+class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
+  final int betIndex;
+  final bool isCompletedList;
+  final BuildContext mainContext;
 
-  Widget renderChild(BuildContext context, Bet bet, Bets bets) {
+  BetPopUp({
+    @required this.betIndex,
+    @required this.isCompletedList,
+    @required this.mainContext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        _actionButtons(bet, bets)
+        _actionButtons(context)
       ]
     );
   }
 
-  Widget _actionButtons(Bet bet, Bets bets) {
+  Widget _actionButtons(BuildContext context) {
+    Bets bets = consumeBets(mainContext);
+    Bet bet = consumeBet(context);
+
     Color contentColor = AppColors.buttonText;
     List<ActionButton> actionButtons = <ActionButton>[
       ActionButton(

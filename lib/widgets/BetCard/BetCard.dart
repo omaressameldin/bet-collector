@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:long_term_bets/consumers/BetsConsumer.dart';
+import 'package:long_term_bets/consumers/BetConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCardInfo.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
-import 'package:provider/provider.dart';
 
-class BetCard extends BetsConsumer with WidgetHelper {
+class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvider {
   final Color _iconColor = AppColors.secondary;
   final TextStyle _titleStyle = TextStyle(
     color: AppColors.cardTitle,
     fontWeight: FontWeight.bold
   );
 
+  final int betIndex;
+  final bool isCompletedList;
 
-  BetCard({@required int betIndex, @required bool isCompletedList}): super(
-    betIndex: betIndex,
-    isCompletedList: isCompletedList
-  );
+  BetCard({@required this.betIndex, @required this.isCompletedList});
 
   @override
-  Widget renderChild(BuildContext context, Bet bet, Bets bets) {
+  Widget build(BuildContext context) {
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(vertical: 8.0),
-      child: _buildTile(context, bet),
+      child: _buildTile(context),
     );
   }
 
-  ListTile _buildTile(BuildContext context, Bet bet) {
+  ListTile _buildTile(BuildContext context) {
+    Bet bet = consumeBet(context);
+
     return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Column(
@@ -57,7 +58,14 @@ class BetCard extends BetsConsumer with WidgetHelper {
               child: FlatButton(
                 onPressed: () => showBottomModal(
                   context,
-                  BetPopUp(betIndex: betIndex, isCompletedList: this.isCompletedList),
+                  provideBet(
+                    bet,
+                    BetPopUp(
+                      mainContext: context,
+                      betIndex: this.betIndex,
+                      isCompletedList: this.isCompletedList
+                    )
+                  ),
                 ),
                 child: Icon(Icons.keyboard_arrow_up, color: _iconColor, size: 30.0),
               )
