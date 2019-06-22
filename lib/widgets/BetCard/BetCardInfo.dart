@@ -17,15 +17,16 @@ class BetCardInfo extends StatelessWidget with WidgetHelper {
     fontWeight: FontWeight.bold
   );
 
+  final MainAxisAlignment alignment;
   final Bet bet;
-  BetCardInfo({@required this.bet});
+  BetCardInfo({@required this.bet, this.alignment: MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 5.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: alignment,
         children: <Widget>[
           buildDividedContainer(false, Wrap(
             spacing: _iconSpacing,
