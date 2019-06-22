@@ -3,7 +3,7 @@ import 'package:long_term_bets/consumers/BetConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
-import 'package:long_term_bets/widgets/BetCard/BetCardInfo.dart';
+import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
 
@@ -47,7 +47,7 @@ class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvide
           style: _titleStyle,
           maxLines: 2,
         ),
-        subtitle: BetCardInfo(bet: bet),
+        subtitle: BetTooltips(bet: bet),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

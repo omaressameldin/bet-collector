@@ -5,7 +5,7 @@ import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:intl/intl.dart';
 
 
-class BetCardInfo extends StatelessWidget with WidgetHelper {
+class BetTooltips extends StatelessWidget with WidgetHelper {
   final DateFormat _dateFormatter = new DateFormat("MMM yyyy");
   final double _bottomIconsSize = 15.0;
   final double _iconSpacing = 1.0;
@@ -19,7 +19,7 @@ class BetCardInfo extends StatelessWidget with WidgetHelper {
 
   final MainAxisAlignment alignment;
   final Bet bet;
-  BetCardInfo({@required this.bet, this.alignment: MainAxisAlignment.start});
+  BetTooltips({@required this.bet, this.alignment: MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {
