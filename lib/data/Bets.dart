@@ -57,6 +57,7 @@ class Bets with ChangeNotifier {
 }
 
 class Bet with ChangeNotifier {
+  final String id;
   final Better better;
   String description;
   String payment;
@@ -64,12 +65,21 @@ class Bet with ChangeNotifier {
   DateTime completionDate;
 
   Bet({
+    @required this.id,
     @required this.better,
     @required this.description,
     @required this.payment,
     @required this.expiryDate,
     this.completionDate
   });
+
+  @override
+  bool operator ==(other) {
+    return (other is Bet && other.id == id);
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 
   _markAsCompleted() {
     this.completionDate = DateTime.now();
@@ -80,11 +90,21 @@ class Bet with ChangeNotifier {
 }
 
 class Better {
+  final String id;
   final String name;
   final CircleAvatar avatar;
 
   Better({
+    @required this.id,
     @required this.name,
     @required this.avatar,
   });
+
+ @override
+  bool operator ==(other) {
+    return (other is Bet && other.id == id);
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
