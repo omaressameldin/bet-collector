@@ -62,6 +62,14 @@ class Bets with ChangeNotifier {
       bet._markAsCompleted();
       _completedBets.add(bet);
     }
+
+    notifyListeners();
+  }
+
+  delete(Bet bet) {
+    _allBets.remove(bet);
+    _completedBets.remove(bet);
+
     notifyListeners();
   }
 }
