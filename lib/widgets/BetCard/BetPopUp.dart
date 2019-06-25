@@ -41,7 +41,10 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
         textColor: contentColor,
         color: AppColors.danger,
         iconStyle: IconStyle(color: contentColor, icon: Icons.delete_forever),
-        onPressed: () {},
+        onPressed: () {
+          bets.delete(bet);
+          Navigator.pop(context);
+        },
       ),
     ];
     if (!bet.isCompleted()) {
