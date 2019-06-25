@@ -8,6 +8,6 @@ mixin BetsConsumer on Widget {
 
   List<Bet> betsList(BuildContext context, bool isCompletedList) {
     Bets bets = consumeBets(context);
-    return isCompletedList ? bets.completedBets : bets.allBets;
+    return (isCompletedList ? bets.completedBets : bets.allBets).toList();
   }
 }

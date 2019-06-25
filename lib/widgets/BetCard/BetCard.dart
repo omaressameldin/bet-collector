@@ -14,10 +14,9 @@ class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvide
     fontWeight: FontWeight.bold
   );
 
-  final int betIndex;
   final bool isCompletedList;
 
-  BetCard({@required this.betIndex, @required this.isCompletedList});
+  BetCard({@required this.isCompletedList});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,6 @@ class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvide
                     bet,
                     BetPopUp(
                       mainContext: context,
-                      betIndex: this.betIndex,
                       isCompletedList: this.isCompletedList
                     )
                   ),
