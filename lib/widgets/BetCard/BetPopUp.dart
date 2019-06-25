@@ -8,15 +8,10 @@ import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 
 class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
-  final int betIndex;
   final bool isCompletedList;
   final BuildContext mainContext;
 
-  BetPopUp({
-    @required this.betIndex,
-    @required this.isCompletedList,
-    @required this.mainContext,
-  });
+  BetPopUp({ @required this.isCompletedList, @required this.mainContext });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +50,7 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
         textColor: contentColor,
         color: AppColors.success,
         iconStyle: IconStyle(color: contentColor, icon: Icons.check_circle),
-        onPressed: () => bets.markAsCompleted(this.betIndex),
+        onPressed: () => bets.markAsCompleted(bet),
       ));
     }
 
