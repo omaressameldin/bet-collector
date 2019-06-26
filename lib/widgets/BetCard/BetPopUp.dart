@@ -8,6 +8,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/widgets/BetCard/Betters.dart';
+import 'BetTooltips.dart';
 
 class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer, BetterConsumer {
   BetPopUp({ @required this.isCompletedList, @required this.mainContext });
@@ -26,6 +27,7 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer, BetterCon
       children: <Widget>[
         _bettersAvatars(context, bet, currentUser),
         _actionButtons(context, bets, bet),
+        BetTooltips(bet: bet, alignment: MainAxisAlignment.center),
       ]
     );
   }
