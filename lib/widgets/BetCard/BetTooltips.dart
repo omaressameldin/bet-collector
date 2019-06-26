@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:intl/intl.dart';
@@ -14,9 +15,18 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
   final DateFormat _dateFormatter = DateFormat('MMM yyyy');
   final double _bottomIconsSize = 15.0;
   final double _iconSpacing = 1.0;
-  final Color _runningIconColor = AppColors.primary;
-  final Color _completedIconColor = AppColors.success;
-  final Color _iconColor = AppColors.secondary;
+  final IconStyle _dateIconStyle = IconStyle(
+    icon: Icons.date_range,
+    color: AppColors.secondary,
+  );
+  final IconStyle _runningIcon = IconStyle(
+    icon: Icons.directions_run,
+    color: AppColors.primary,
+  );
+  final IconStyle _completedIcon = IconStyle(
+    icon: Icons.check_circle,
+    color: AppColors.success,
+  );
   final TextStyle _iconTextStyle = TextStyle(
     color: AppColors.cardText,
     fontWeight: FontWeight.bold
@@ -34,8 +44,8 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             spacing: _iconSpacing,
             children: <Widget>[
               Icon(
-                bet.isCompleted() ? Icons.check_circle : Icons.directions_run,
-                color: bet.isCompleted() ? _completedIconColor : _runningIconColor,
+                bet.isCompleted() ? _completedIcon.icon : _runningIcon.icon,
+                color: bet.isCompleted() ? _completedIcon.color : _runningIcon.color,
                 size: _bottomIconsSize,
               ),
               Text(
@@ -48,8 +58,8 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             spacing: _iconSpacing,
             children: <Widget>[
               Icon(
-                Icons.date_range,
-                color: _iconColor,
+                _dateIconStyle.icon,
+                color: _dateIconStyle.color,
                 size: _bottomIconsSize,
               ),
               Text(
