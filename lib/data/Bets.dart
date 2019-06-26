@@ -4,60 +4,65 @@ import 'package:flutter/material.dart';
 
 List<Bet> bets = <Bet>[
       Bet(
-        id: "1",
+        id: '1',
         better: Better(
-          name: "Shadwa",
+          id: '1',
+          name: 'Shadwa',
           avatar: CircleAvatar(
-            backgroundImage: NetworkImage("https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png"),
+            backgroundImage: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
           ),
         ),
-        description: "shadwa will stay thin after marriage",
-        payment: "Omar will go down on shadwa for thirty minutes",
+        description: 'shadwa will stay thin after marriage',
+        payment: 'Omar will go down on shadwa for thirty minutes',
         expiryDate: DateTime(2024, 1, 1)
       ),
       Bet(
-        id: "2",
+        id: '2',
         better: Better(
-          name: "Omar",
+          id: '2',
+          name: 'Omar',
           avatar: CircleAvatar(
-            backgroundImage: NetworkImage("https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png"),
+            backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
           )
         ),
-        description: "Aley is gonna live outside of Egypt",
-        payment: "Shadwa will give Omar a lapdance",
+        description: 'Aley is gonna live outside of Egypt',
+        payment: 'Shadwa will give Omar a lapdance',
         expiryDate: DateTime(2022, 1, 1)
       ),
       Bet(
-        id: "3",
+        id: '3',
         better: Better(
-          name: "Omar",
+          id: '2',
+          name: 'Omar',
           avatar: CircleAvatar(
-            backgroundImage: NetworkImage("https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png"),
+            backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
           )
         ),
-        description: "Aley will finish university soon",
+        description: 'Aley will finish university soon',
+        payment: 'Omar Will give shadwa 10\$',
         expiryDate: DateTime(2019, 1, 1),
         completionDate: DateTime(2018, 6, 1)
       )
     ];
 
 class Bets with ChangeNotifier {
-  HashSet<Bet> _allBets = new HashSet<Bet>();
-  HashSet<Bet> _completedBets = new HashSet<Bet>();
-
   Bets(): super() {
     _allBets.addAll(bets);
     _completedBets.add(bets[2]);
   }
 
+  final HashSet<Bet> _allBets = HashSet<Bet>();
+  final HashSet<Bet> _completedBets = HashSet<Bet>();
+
+
   HashSet<Bet> get allBets => _allBets;
   HashSet<Bet> get completedBets => _completedBets;
 
-  getNewBets() {
+  void getNewBets() {
     notifyListeners();
   }
 
-  markAsCompleted(Bet bet) {
+  void markAsCompleted(Bet bet) {
     if(_allBets.contains(bet)) {
       bet._markAsCompleted();
       _completedBets.add(bet);
@@ -66,7 +71,7 @@ class Bets with ChangeNotifier {
     notifyListeners();
   }
 
-  delete(Bet bet) {
+  void delete(Bet bet) {
     _allBets.remove(bet);
     _completedBets.remove(bet);
 
@@ -75,13 +80,6 @@ class Bets with ChangeNotifier {
 }
 
 class Bet with ChangeNotifier {
-  final String id;
-  final Better better;
-  String description;
-  String payment;
-  DateTime expiryDate;
-  DateTime completionDate;
-
   Bet({
     @required this.id,
     @required this.better,
@@ -91,36 +89,44 @@ class Bet with ChangeNotifier {
     this.completionDate
   });
 
+  final String id;
+  final Better better;
+  String description;
+  String payment;
+  DateTime expiryDate;
+  DateTime completionDate;
+
+
   @override
-  bool operator ==(other) {
-    return (other is Bet && other.id == id);
+  bool operator ==(dynamic other) {
+    return other is Bet && other.id == id;
   }
 
   @override
   int get hashCode => id.hashCode;
 
-  _markAsCompleted() {
-    this.completionDate = DateTime.now();
+  void _markAsCompleted() {
+    completionDate = DateTime.now();
     notifyListeners();
   }
 
-  bool isCompleted() => this.completionDate != null;
+  bool isCompleted() => completionDate != null;
 }
 
 class Better {
-  final String id;
-  final String name;
-  final CircleAvatar avatar;
-
   Better({
     @required this.id,
     @required this.name,
     @required this.avatar,
   });
 
+  final String id;
+  final String name;
+  final CircleAvatar avatar;
+
  @override
-  bool operator ==(other) {
-    return (other is Bet && other.id == id);
+  bool operator ==(dynamic other) {
+    return other is Better && other.id == id;
   }
 
   @override

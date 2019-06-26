@@ -21,22 +21,21 @@ class MyApp extends StatelessWidget {
 }
 
 class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
-  final bool isCompletedList;
-
-
   BetsList({
     @required this.isCompletedList,
   });
 
+  final bool isCompletedList;
+
   Widget _buildSuggestions(BuildContext context) {
-    List<Bet> betsToShow = betsList(context, this.isCompletedList);
+    final List<Bet> betsToShow = betsList(context, isCompletedList);
     return ListView.builder(
         padding: const EdgeInsets.all(5.0),
-        itemBuilder: (context, i) {
+        itemBuilder: (BuildContext context, int i) {
           if (i < betsToShow.length) {
             return provideBet(
               betsToShow[i],
-              BetCard(isCompletedList: this.isCompletedList)
+              BetCard(isCompletedList: isCompletedList)
             );
           }
         });
@@ -57,11 +56,11 @@ class NavigationState extends State<Navigation> with BetsProvider {
 
   @override
   Widget build(BuildContext context) {
-    Bets bets = Bets();
+    final Bets bets = Bets();
     return Scaffold(
       appBar: AppBar(
         elevation: 8.0,
-        title: Text('Long Term Bets'),
+        title: const Text('Long Term Bets'),
         backgroundColor: AppColors.primary,
       ),
       body: provideBets(bets, _children[_currentIndex]),
@@ -71,14 +70,14 @@ class NavigationState extends State<Navigation> with BetsProvider {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.secondary,
         onTap: onTabTapped,
-        items: [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: new Icon(Icons.list),
-            title: new Text('All'),
+            icon: Icon(Icons.list),
+            title: Text('All'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.favorite),
-            title: new Text('Favorites'),
+            icon: Icon(Icons.favorite),
+            title: Text('Favorites'),
           )
         ],
       ),

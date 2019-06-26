@@ -8,30 +8,30 @@ import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
 
 class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvider {
+  BetCard({@required this.isCompletedList});
+
+  final bool isCompletedList;
+
   final Color _iconColor = AppColors.secondary;
   final TextStyle _titleStyle = TextStyle(
     color: AppColors.cardTitle,
     fontWeight: FontWeight.bold
   );
 
-  final bool isCompletedList;
-
-  BetCard({@required this.isCompletedList});
-
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 8.0,
-      margin: new EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: _buildTile(context),
     );
   }
 
   ListTile _buildTile(BuildContext context) {
-    Bet bet = consumeBet(context);
+    final Bet bet = consumeBet(context);
 
     return ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -52,8 +52,8 @@ class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvide
           children: <Widget>[
             ButtonTheme(
               minWidth: 5.0,
-              padding: EdgeInsets.all(0),
-              shape: CircleBorder(side: BorderSide.none),
+              padding: const EdgeInsets.all(0),
+              shape: const CircleBorder(side: BorderSide.none),
               child: FlatButton(
                 onPressed: () => showBottomModal(
                   context,
@@ -61,7 +61,7 @@ class BetCard extends StatelessWidget with WidgetHelper, BetConsumer, BetProvide
                     bet,
                     BetPopUp(
                       mainContext: context,
-                      isCompletedList: this.isCompletedList
+                      isCompletedList: isCompletedList
                     )
                   ),
                 ),

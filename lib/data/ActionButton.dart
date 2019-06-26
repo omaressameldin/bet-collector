@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 
 class ActionButton {
+  ActionButton({
+    @required this.text,
+    @required this.color,
+    @required this.textColor,
+    @required this.onPressed,
+    this.iconStyle,
+  });
+
   final double iconSize = 15.0;
   final double textSize = 13.0;
   final double horizontalPadding = 30.0;
@@ -13,17 +21,8 @@ class ActionButton {
   final IconStyle iconStyle;
   final Function onPressed;
 
-
-  ActionButton({
-    @required this.text,
-    @required this.color,
-    @required this.textColor,
-    @required this.onPressed,
-    this.iconStyle,
-  });
-
   ButtonTheme generateButton() {
-    Wrap buttonContent = Wrap(
+    final Wrap buttonContent = Wrap(
       spacing: 2.0,
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,

@@ -6,7 +6,12 @@ import 'package:intl/intl.dart';
 
 
 class BetTooltips extends StatelessWidget with WidgetHelper {
-  final DateFormat _dateFormatter = new DateFormat("MMM yyyy");
+  BetTooltips({@required this.bet, this.alignment = MainAxisAlignment.start});
+
+  final MainAxisAlignment alignment;
+  final Bet bet;
+
+  final DateFormat _dateFormatter = DateFormat('MMM yyyy');
   final double _bottomIconsSize = 15.0;
   final double _iconSpacing = 1.0;
   final Color _runningIconColor = AppColors.primary;
@@ -17,14 +22,11 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
     fontWeight: FontWeight.bold
   );
 
-  final MainAxisAlignment alignment;
-  final Bet bet;
-  BetTooltips({@required this.bet, this.alignment: MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 5.0),
+      padding: const EdgeInsets.only(top: 5.0),
       child: Row(
         mainAxisAlignment: alignment,
         children: <Widget>[
@@ -37,7 +39,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
                 size: _bottomIconsSize,
               ),
               Text(
-                bet.isCompleted() ? "Completed" : "Running",
+                bet.isCompleted() ? 'Completed' : 'Running',
                 style: _iconTextStyle,
               ),
             ],
