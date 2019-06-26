@@ -57,7 +57,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
   @override
   Widget build(BuildContext context) {
     final Bets bets = Bets();
-    final String betterId = "2";
+    const String betterId = '2';
 
     return Scaffold(
       appBar: AppBar(

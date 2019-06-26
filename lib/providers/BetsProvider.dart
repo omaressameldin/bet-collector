@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 mixin BetsProvider {
   Widget provideBets(Bets bets, String betterId, BetsConsumer child) {
     return MultiProvider(
-      providers: [
+      providers: <SingleChildCloneableWidget>[
         ChangeNotifierProvider<Bets>(builder: (_) => bets),
         Provider<String>(builder: (_) => betterId),
       ],
