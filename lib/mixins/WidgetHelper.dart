@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/data/ActionButton.dart';
+import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 mixin WidgetHelper {
   Container buildDividedContainer(bool isBig, Widget child, {bool isLast = false}) {
@@ -23,4 +25,40 @@ mixin WidgetHelper {
       builder: (BuildContext bc) => child,
     );
   }
+
+Future<void> showAlert(
+  BuildContext context,
+  String title,
+  Widget child,
+  List<ActionButton> actions,
+) async {
+  final Function dismissAlert = () => Navigator.of(context).pop();
+
+  final List<ButtonTheme> actionButtons = actions.map((ActionButton button) =>
+    button.generateButton(callback: dismissAlert)
+  ).toList();
+
+  actionButtons.add(ActionButton(
+    isFlat: true,
+    onPressed: dismissAlert,
+    text: 'Discard',
+    textColor: AppColors.buttonText,
+    color: AppColors.transparent,
+    iconStyle: IconStyle(icon: Icons.keyboard_backspace, color: AppColors.buttonText)
+    ).generateButton());
+
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (_) {
+      return AlertDialog(
+        title: Text(title),
+        content: SingleChildScrollView(
+          child: child,
+        ),
+        actions: actionButtons,
+      );
+    },
+  );
+}
 }

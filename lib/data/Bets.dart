@@ -5,16 +5,12 @@ import 'package:flutter/material.dart';
 Better better1 = Better(
   id: '1',
   name: 'Shadwa',
-  avatar: CircleAvatar(
-    backgroundImage: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
-  ),
+  avatar: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
 );
 Better better2 = Better(
   id: '2',
   name: 'Omar',
-  avatar: CircleAvatar(
-    backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
-  )
+  avatar: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
 );
 
 // TODO: Remove once backend is connected
@@ -22,6 +18,7 @@ List<Bet> bets = <Bet>[
       Bet(
         id: '1',
         better: better1,
+        winner: better1,
         accepter: better2,
         description: 'shadwa will stay thin after marriage',
         payment: 'Omar will go down on shadwa for thirty minutes',
@@ -30,6 +27,7 @@ List<Bet> bets = <Bet>[
       Bet(
         id: '2',
         better: better2,
+        winner: better1,
         accepter: better1,
         description: 'Aley is gonna live outside of Egypt',
         payment: 'Shadwa will give Omar a lapdance',
@@ -38,6 +36,7 @@ List<Bet> bets = <Bet>[
       Bet(
         id: '3',
         better: better2,
+        winner: better2,
         accepter: better1,
         description: 'Aley will finish university soon',
         payment: 'Omar Will give shadwa 10\$',
@@ -68,10 +67,23 @@ class Bets with ChangeNotifier {
     return better2;
   }
 
-  void markAsCompleted(Bet bet) {
+  void markAsCompleted(Bet bet, Better winner) {
     if(_allBets.contains(bet)) {
-      bet._markAsCompleted();
+      bet._markAsCompleted(winner);
       _completedBets.add(bet);
+    } else {
+      throw Exception('Only running bets can be marked as completed');
+    }
+
+    notifyListeners();
+  }
+
+  void markAsRunning(Bet bet) {
+    if(_allBets.contains(bet) && _completedBets.contains(bet)) {
+      bet._markAsRunning();
+      _completedBets.remove(bet);
+    } else {
+      throw Exception('Only completed bets can be marked as running');
     }
 
     notifyListeners();
@@ -93,7 +105,8 @@ class Bet with ChangeNotifier {
     @required this.description,
     @required this.payment,
     @required this.expiryDate,
-    this.completionDate
+    this.completionDate,
+    this.winner,
   });
 
   final String id;
@@ -103,6 +116,7 @@ class Bet with ChangeNotifier {
   String payment;
   DateTime expiryDate;
   DateTime completionDate;
+  Better winner;
 
 
   @override
@@ -113,12 +127,24 @@ class Bet with ChangeNotifier {
   @override
   int get hashCode => id.hashCode;
 
-  void _markAsCompleted() {
+  void _markAsCompleted(Better winner) {
+    if (winner != better && winner != accepter) {
+      throw Exception('Only accepter or better can win a bet!');
+    }
+
+    this.winner = winner;
     completionDate = DateTime.now();
     notifyListeners();
   }
 
-  bool isCompleted() => completionDate != null;
+    void _markAsRunning() {
+    completionDate = null;
+    winner = null;
+
+    notifyListeners();
+  }
+
+  bool isCompleted() => completionDate != null && winner != null;
 
   Better getOtherSide(Better currentUser) {
     if (currentUser == better) {
@@ -139,7 +165,7 @@ class Better {
 
   final String id;
   final String name;
-  final CircleAvatar avatar;
+  final NetworkImage avatar;
 
  @override
   bool operator ==(dynamic other) {
