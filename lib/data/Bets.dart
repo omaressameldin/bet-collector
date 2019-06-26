@@ -1,43 +1,44 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-
-List<Bet> bets = <Bet>[
-      Bet(
+// TODO: Remove once backend is connected
+Better better1 = Better(
         id: '1',
-        better: Better(
-          id: '1',
           name: 'Shadwa',
           avatar: CircleAvatar(
             backgroundImage: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
           ),
-        ),
+);
+Better better2 = Better(
+  id: '2',
+  name: 'Omar',
+  avatar: CircleAvatar(
+    backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
+  )
+);
+
+// TODO: Remove once backend is connected
+List<Bet> bets = <Bet>[
+      Bet(
+        id: '1',
+        better: better1,
+        accepter: better2,
         description: 'shadwa will stay thin after marriage',
         payment: 'Omar will go down on shadwa for thirty minutes',
         expiryDate: DateTime(2024, 1, 1)
       ),
       Bet(
         id: '2',
-        better: Better(
-          id: '2',
-          name: 'Omar',
-          avatar: CircleAvatar(
-            backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
-          )
-        ),
+        better: better2,
+        accepter: better1,
         description: 'Aley is gonna live outside of Egypt',
         payment: 'Shadwa will give Omar a lapdance',
         expiryDate: DateTime(2022, 1, 1)
       ),
       Bet(
         id: '3',
-        better: Better(
-          id: '2',
-          name: 'Omar',
-          avatar: CircleAvatar(
-            backgroundImage: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
-          )
-        ),
+        better: better2,
+        accepter: better1,
         description: 'Aley will finish university soon',
         payment: 'Omar Will give shadwa 10\$',
         expiryDate: DateTime(2019, 1, 1),
