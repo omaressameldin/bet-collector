@@ -4,11 +4,11 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:provider/provider.dart';
 
 mixin BetsProvider {
-  Widget provideBets(Bets bets, String betterId, BetsConsumer child) {
+  Widget provideBets(Bets bets, Better better, BetsConsumer child) {
     return MultiProvider(
       providers: <SingleChildCloneableWidget>[
         ChangeNotifierProvider<Bets>(builder: (_) => bets),
-        Provider<String>(builder: (_) => betterId),
+        Provider<Better>(builder: (_) => better),
       ],
       child: child
   );

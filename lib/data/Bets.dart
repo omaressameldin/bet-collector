@@ -3,11 +3,11 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 // TODO: Remove once backend is connected
 Better better1 = Better(
-        id: '1',
-          name: 'Shadwa',
-          avatar: CircleAvatar(
-            backgroundImage: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
-          ),
+  id: '1',
+  name: 'Shadwa',
+  avatar: CircleAvatar(
+    backgroundImage: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
+  ),
 );
 Better better2 = Better(
   id: '2',
@@ -63,6 +63,11 @@ class Bets with ChangeNotifier {
     notifyListeners();
   }
 
+  // TODO: Remove once backend is connected
+  Better getLoggedInBetter() {
+    return better2;
+  }
+
   void markAsCompleted(Bet bet) {
     if(_allBets.contains(bet)) {
       bet._markAsCompleted();
@@ -84,6 +89,7 @@ class Bet with ChangeNotifier {
   Bet({
     @required this.id,
     @required this.better,
+    @required this.accepter,
     @required this.description,
     @required this.payment,
     @required this.expiryDate,
@@ -92,6 +98,7 @@ class Bet with ChangeNotifier {
 
   final String id;
   final Better better;
+  final Better accepter;
   String description;
   String payment;
   DateTime expiryDate;
@@ -112,7 +119,16 @@ class Bet with ChangeNotifier {
   }
 
   bool isCompleted() => completionDate != null;
+
+  Better getOtherSide(Better currentUser) {
+    if (currentUser == better) {
+      return accepter;
+    } else {
+      return better;
+    }
+  }
 }
+
 
 class Better {
   Better({

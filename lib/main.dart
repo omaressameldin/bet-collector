@@ -57,7 +57,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
   @override
   Widget build(BuildContext context) {
     final Bets bets = Bets();
-    const String betterId = '2';
+    final Better better = bets.getLoggedInBetter();
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +65,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
         title: const Text('Long Term Bets'),
         backgroundColor: AppColors.primary,
       ),
-      body: provideBets(bets, betterId, _children[_currentIndex]),
+      body: provideBets(bets, better, _children[_currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8.0,
         currentIndex: _currentIndex,
