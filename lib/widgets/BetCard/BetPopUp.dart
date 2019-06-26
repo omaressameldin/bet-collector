@@ -8,10 +8,10 @@ import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 
 class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
+  BetPopUp({ @required this.isCompletedList, @required this.mainContext });
+
   final bool isCompletedList;
   final BuildContext mainContext;
-
-  BetPopUp({ @required this.isCompletedList, @required this.mainContext });
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +23,18 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
     );
   }
 
-  Widget _actionButtons(BuildContext context) {
-    Bets bets = consumeBets(mainContext);
-    Bet bet = consumeBet(context);
-
-    Color contentColor = AppColors.buttonText;
-    List<ActionButton> actionButtons = <ActionButton>[
+  List<ActionButton> _actionButtonsList(BuildContext context, Bets bets, Bet bet) {
+    final Color contentColor = AppColors.buttonText;
+    final List<ActionButton> actionButtons =  <ActionButton>[
       ActionButton(
-        text: "Edit",
+        text: 'Edit',
         textColor: contentColor,
         color: AppColors.primary,
         iconStyle: IconStyle(color: contentColor, icon: Icons.edit),
         onPressed: () {},
       ),
       ActionButton(
-        text: "Delete",
+        text: 'Delete',
         textColor: contentColor,
         color: AppColors.danger,
         iconStyle: IconStyle(color: contentColor, icon: Icons.delete_forever),
@@ -47,9 +44,10 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
         },
       ),
     ];
+
     if (!bet.isCompleted()) {
       actionButtons.insert(0, ActionButton(
-        text: "Done",
+        text: 'Done',
         textColor: contentColor,
         color: AppColors.success,
         iconStyle: IconStyle(color: contentColor, icon: Icons.check_circle),
@@ -57,11 +55,19 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
       ));
     }
 
+    return actionButtons;
+  }
+
+  Widget _actionButtons(BuildContext context) {
+    final Bets bets = consumeBets(mainContext);
+    final Bet bet = consumeBet(context);
+    final List<ActionButton> actionButtons = _actionButtonsList(context, bets, bet);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: actionButtons.map((button) {
+      children: actionButtons.map((ActionButton button) {
         return Padding(
-          padding: new EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child:button.generateButton()
         );
       }).toList()
