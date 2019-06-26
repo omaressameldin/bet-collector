@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:long_term_bets/consumers/BetConsumer.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
+import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/widgets/BetCard/Betters.dart';
 
-class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
+class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer, BetterConsumer {
   BetPopUp({ @required this.isCompletedList, @required this.mainContext });
 
   final bool isCompletedList;
@@ -15,10 +17,15 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
 
   @override
   Widget build(BuildContext context) {
+    final Bets bets = consumeBets(mainContext);
+    final Bet bet = consumeBet(context);
+    final Better currentUser = consumeBetter(mainContext);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        _actionButtons(context)
+        _bettersAvatars(context, bet, currentUser),
+        _actionButtons(context, bets, bet),
       ]
     );
   }
@@ -58,9 +65,7 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
     return actionButtons;
   }
 
-  Widget _actionButtons(BuildContext context) {
-    final Bets bets = consumeBets(mainContext);
-    final Bet bet = consumeBet(context);
+  Widget _actionButtons(BuildContext context, Bets bets, Bet bet) {
     final List<ActionButton> actionButtons = _actionButtonsList(context, bets, bet);
 
     return Row(
@@ -74,4 +79,11 @@ class BetPopUp extends StatelessWidget with BetsConsumer, BetConsumer {
     );
   }
 
+  Widget _bettersAvatars(BuildContext context, Bet bet, Better currentUser) {
+    return Betters(
+      currentUser: currentUser,
+      better: bet.better,
+      accepter: bet.accepter,
+      );
+  }
 }
