@@ -7,6 +7,7 @@ class ActionButton {
     @required this.color,
     @required this.textColor,
     @required this.onPressed,
+    @required this.isFlat,
     this.iconStyle,
   });
 
@@ -20,8 +21,9 @@ class ActionButton {
   final Color textColor;
   final IconStyle iconStyle;
   final Function onPressed;
+  final bool isFlat;
 
-  ButtonTheme generateButton() {
+  ButtonTheme generateButton({Function callback}) {
     final Wrap buttonContent = Wrap(
       spacing: 2.0,
       alignment: WrapAlignment.center,
@@ -29,6 +31,15 @@ class ActionButton {
       children: <Widget>[Text(text, style: TextStyle(fontSize: textSize, color: textColor)),
       ],
     );
+    final Function pressedFn = () {
+      onPressed();
+      if (callback != null) {
+        callback();
+      }
+    };
+    final MaterialButton button = isFlat ?
+      FlatButton(onPressed: pressedFn, child: buttonContent) :
+      RaisedButton(onPressed: pressedFn, child: buttonContent);
     if (iconStyle != null) {
       buttonContent.children.insert(
           0,
@@ -40,7 +51,7 @@ class ActionButton {
       buttonColor: color,
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(buttonRadius)),
-      child: RaisedButton(onPressed: onPressed, child: buttonContent),
+      child: button,
     );
   }
 }

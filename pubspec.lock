@@ -67,6 +67,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.5"
+  material_design_icons_flutter:
+    dependency: "direct main"
+    description:
+      name: material_design_icons_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.3695"
   meta:
     dependency: transitive
     description:
@@ -165,3 +172,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.2.0 <3.0.0"
+  flutter: ">=0.1.2"

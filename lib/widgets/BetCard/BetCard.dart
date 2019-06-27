@@ -4,6 +4,7 @@ import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
@@ -45,7 +46,7 @@ class BetCard extends StatelessWidget with
           children: <Widget>[
             buildDividedContainer(
               true,
-              otherSide.avatar,
+              Avatar(avatar: otherSide.avatar, isBig: true),
             )
           ],
         ),

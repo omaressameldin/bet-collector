@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/widgets/Better/BetterAvatar.dart';
 
 
 class Betters extends StatelessWidget {
-  Betters({@required this.currentUser, @required this.accepter, @required this.better});
+  Betters({@required this.accepter, @required this.better, @required this.mainContext});
 
-  final Better currentUser;
   final Better better;
   final Better accepter;
+  final BuildContext mainContext;
 
   final MainAxisAlignment alignment = MainAxisAlignment.center;
   final double iconSize = 50.0;
   final IconStyle vsIconStyle = IconStyle(
     color: AppColors.secondary,
     icon: Icons.compare_arrows
-  );
-  final TextStyle _avatarTextStyle = TextStyle(
-    color: AppColors.secondary,
-    fontWeight: FontWeight.bold
   );
 
   @override
@@ -41,10 +38,12 @@ class Betters extends StatelessWidget {
   Widget _avatar(Better better) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Column(children: <Widget>[
-        better.avatar,
-        Text(better == currentUser ? 'You' : better.name, style: _avatarTextStyle)
-      ])
+      child: BetterAvatar(
+        better: better,
+        isBig: true,
+        mainContext: mainContext,
+        isVertical: true,
+      )
     );
   }
 }
