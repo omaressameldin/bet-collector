@@ -52,7 +52,6 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
     ) {
     return ActionButton(
       text: text,
-      textColor: _contentColor,
       color: background,
       iconStyle: IconStyle(color: _contentColor, icon: icon),
       isFlat: _isFlat,

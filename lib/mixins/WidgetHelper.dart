@@ -43,7 +43,6 @@ Future<void> showAlert(
     isFlat: true,
     onPressed: dismissAlert,
     text: 'Discard',
-    textColor: AppColors.buttonText,
     color: AppColors.transparent,
     iconStyle: IconStyle(icon: AppIcons.back, color: AppColors.buttonText)
     ).generateButton());

@@ -6,6 +6,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
@@ -22,10 +23,6 @@ class BetCard extends StatelessWidget with
   final BetsType betsType;
 
   final Color _iconColor = AppColors.secondary;
-  final TextStyle _titleStyle = TextStyle(
-    color: AppColors.cardTitle,
-    fontWeight: FontWeight.bold
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +51,7 @@ class BetCard extends StatelessWidget with
         ),
         title: Text(
           bet.description,
-          style: _titleStyle,
+          style: TextStyles.titleStyle,
           maxLines: 2,
         ),
         subtitle: BetTooltips(bet: bet),

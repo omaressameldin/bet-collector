@@ -5,6 +5,7 @@ import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:intl/intl.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 
 class BetTooltips extends StatelessWidget with WidgetHelper {
@@ -36,11 +37,6 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
     icon: AppIcons.betWinner,
     color: AppColors.winner,
   );
-  final TextStyle _iconTextStyle = TextStyle(
-    color: AppColors.cardText,
-    fontWeight: FontWeight.bold
-  );
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +68,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
         ),
         Text(
           bet.isCompleted() ? 'Done' : 'Running',
-          style: _iconTextStyle,
+          style: TextStyles.tooltipStyle,
         ),
       ],
     ));
@@ -95,8 +91,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             _dateFormatter.format(
               bet.isCompleted() ?  bet.completionDate : bet.expiryDate,
             ),
-            style: _iconTextStyle
-
+            style: TextStyles.tooltipStyle,
           ),
         ],
       ),
