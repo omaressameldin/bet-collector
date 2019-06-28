@@ -4,6 +4,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 
 
@@ -72,10 +73,22 @@ class NavigationState extends State<Navigation> with BetsProvider {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.secondary,
         onTap: onTabTapped,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            title: Text('All'),
+            icon: Icon(AppIcons.allBets),
+            title: const Text('All'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(AppIcons.runningBets),
+            title: const Text('Running'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(AppIcons.betWinner),
+            title: const Text('Won'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(AppIcons.betLoser),
+            title: const Text('Lost'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),

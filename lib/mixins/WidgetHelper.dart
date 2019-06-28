@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
 mixin WidgetHelper {
   Container buildDividedContainer(bool isBig, Widget child, {bool isLast = false}) {
     final double rightPadding = isBig ? 12.0 : 6.0;
@@ -44,7 +45,7 @@ Future<void> showAlert(
     text: 'Discard',
     textColor: AppColors.buttonText,
     color: AppColors.transparent,
-    iconStyle: IconStyle(icon: Icons.keyboard_backspace, color: AppColors.buttonText)
+    iconStyle: IconStyle(icon: AppIcons.back, color: AppColors.buttonText)
     ).generateButton());
 
   return showDialog<void>(

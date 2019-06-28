@@ -4,6 +4,7 @@ import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
@@ -74,7 +75,7 @@ class BetCard extends StatelessWidget with
                     )
                   ),
                 ),
-                child: Icon(Icons.keyboard_arrow_up, color: _iconColor, size: 30.0),
+                child: Icon(AppIcons.showPopup, color: _iconColor, size: 30.0),
               )
             )
 

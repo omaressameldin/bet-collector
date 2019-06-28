@@ -4,8 +4,8 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/BetCard/WinnerPicker.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BetActionsState extends State<BetActions> with WidgetHelper{
   BetActionsState({@required this.bets, @required this.bet, @required this.mainContext});
@@ -63,7 +63,7 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
   ActionButton _editButton() {
     final Function pressFn = (){};
 
-    return _createActionButton('Edit', AppColors.secondary, Icons.edit, pressFn);
+    return _createActionButton('Edit', AppColors.secondary, AppIcons.edit, pressFn);
   }
 
   ActionButton _deleteButon() {
@@ -75,7 +75,7 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
     return _createActionButton(
       'Delete',
       AppColors.danger,
-      Icons.delete_forever,
+      AppIcons.delete,
       pressFn,
     );
   }
@@ -84,7 +84,7 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
     final Function pressFn = () {
       bets.markAsCompleted(bet, _selected);
     };
-    return _createActionButton('Confirm', AppColors.success, MdiIcons.trophy, pressFn);
+    return _createActionButton('Confirm', AppColors.success, AppIcons.betWinner, pressFn);
   }
 
   ActionButton _setProgressButton() {
@@ -105,14 +105,19 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
         );
       };
 
-      return _createActionButton('Done', AppColors.success, Icons.check_circle, pressFn);
+      return _createActionButton(
+        'Done',
+        AppColors.success,
+        AppIcons.completedBets,
+        pressFn,
+      );
     } else {
       final Function pressFn = () => bets.markAsRunning(bet);
 
       return _createActionButton(
         'Running',
         AppColors.info,
-        Icons.directions_run,
+        AppIcons.runningBets,
         pressFn,
       );
     }
