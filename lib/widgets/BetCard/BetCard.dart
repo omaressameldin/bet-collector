@@ -47,7 +47,7 @@ class BetCard extends StatelessWidget with
           children: <Widget>[
             buildDividedContainer(
               true,
-              Avatar(avatar: otherSide.avatar, isBig: true),
+              Avatar(avatar: otherSide.avatar, size: avatarSize.big),
             )
           ],
         ),

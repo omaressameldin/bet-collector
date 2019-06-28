@@ -7,13 +7,13 @@ import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 class BetterAvatar extends StatelessWidget with BetterConsumer {
   BetterAvatar({
   @required this.better,
-   @required this.isBig,
+   @required this.size,
    @required this.isVertical,
    this.mainContext,
   });
 
   final Better better;
-  final bool isBig;
+  final avatarSize size;
   final bool isVertical;
   final BuildContext mainContext;
 
@@ -32,7 +32,7 @@ class BetterAvatar extends StatelessWidget with BetterConsumer {
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: isVertical ? 0.0 : 5.0,
       children: <Widget>[
-        Avatar(avatar: better.avatar, isBig: isBig),
+        Avatar(avatar: better.avatar, size: size),
         Text(better == currentUser ? 'You' : better.name, style: _avatarTextStyle)
       ]);
   }

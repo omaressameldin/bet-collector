@@ -3,6 +3,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/Better/BetterAvatar.dart';
 
 
@@ -41,7 +42,7 @@ class Betters extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: BetterAvatar(
         better: better,
-        isBig: true,
+        size: avatarSize.big,
         mainContext: mainContext,
         isVertical: true,
       )

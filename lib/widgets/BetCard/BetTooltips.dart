@@ -115,7 +115,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             color: _winnerIcon.color,
             size: _bottomIconsSize,
           ),
-          Avatar(avatar: bet.winner.avatar, isBig: false),
+          Avatar(avatar: bet.winner.avatar, size: avatarSize.small),
         ],
       ),
       isLast: true

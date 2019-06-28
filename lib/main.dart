@@ -5,6 +5,7 @@ import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 
 
@@ -91,8 +92,8 @@ class NavigationState extends State<Navigation> with BetsProvider {
             title: const Text('Lost'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text('Favorites'),
+            icon: Avatar(size: avatarSize.medium, avatar: better.avatar),
+            title: const Text('Lost'),
           )
         ],
       ),
