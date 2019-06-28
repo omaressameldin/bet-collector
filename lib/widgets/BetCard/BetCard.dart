@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetConsumer.dart';
+import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
@@ -16,9 +17,9 @@ class BetCard extends StatelessWidget with
   BetConsumer,
   BetProvider
 {
-  BetCard({@required this.isCompletedList});
+  BetCard({@required this.betsType});
 
-  final bool isCompletedList;
+  final BetsType betsType;
 
   final Color _iconColor = AppColors.secondary;
   final TextStyle _titleStyle = TextStyle(
@@ -69,10 +70,7 @@ class BetCard extends StatelessWidget with
                   context,
                   provideBet(
                     bet,
-                    BetPopUp(
-                      mainContext: context,
-                      isCompletedList: isCompletedList
-                    )
+                    BetPopUp(mainContext: context),
                   ),
                 ),
                 child: Icon(AppIcons.showPopup, color: _iconColor, size: 30.0),

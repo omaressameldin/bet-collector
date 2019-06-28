@@ -24,20 +24,20 @@ class MyApp extends StatelessWidget {
 
 class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
   BetsList({
-    @required this.isCompletedList,
+    @required this.betsType,
   });
 
-  final bool isCompletedList;
+  final BetsType betsType;
 
   Widget _buildSuggestions(BuildContext context) {
-    final List<Bet> betsToShow = betsList(context, isCompletedList);
+    final List<Bet> betsToShow = betsList(context, betsType);
     return ListView.builder(
         padding: const EdgeInsets.all(5.0),
         itemBuilder: (BuildContext context, int i) {
           if (i < betsToShow.length) {
             return provideBet(
               betsToShow[i],
-              BetCard(isCompletedList: isCompletedList)
+              BetCard(betsType: betsType)
             );
           }
         });
@@ -52,8 +52,8 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
 class NavigationState extends State<Navigation> with BetsProvider {
   int _currentIndex = 0;
   final List<Widget> _children = <Widget>[
-    BetsList(isCompletedList: false),
-    BetsList(isCompletedList: true),
+    BetsList(betsType: BetsType.all),
+    BetsList(betsType: BetsType.running),
   ];
 
   @override
