@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
-import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
-import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
+import 'package:long_term_bets/widgets/BetsList/BetsList.dart';
 
 
 void main() => runApp(MyApp());
@@ -19,33 +18,6 @@ class MyApp extends StatelessWidget {
       title: 'Long Term Bets',
       home: Navigation()
     );
-  }
-}
-
-class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
-  BetsList({
-    @required this.betsType,
-  });
-
-  final BetsType betsType;
-
-  Widget _buildSuggestions(BuildContext context) {
-    final List<Bet> betsToShow = betsList(context, betsType);
-    return ListView.builder(
-        padding: const EdgeInsets.all(5.0),
-        itemBuilder: (BuildContext context, int i) {
-          if (i < betsToShow.length) {
-            return provideBet(
-              betsToShow[i],
-              BetCard(betsType: betsType)
-            );
-          }
-        });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildSuggestions(context);
   }
 }
 
