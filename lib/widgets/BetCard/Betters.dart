@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/Better/BetterAvatar.dart';
 
 
@@ -16,7 +18,7 @@ class Betters extends StatelessWidget {
   final double iconSize = 50.0;
   final IconStyle vsIconStyle = IconStyle(
     color: AppColors.secondary,
-    icon: Icons.compare_arrows
+    icon: AppIcons.vs,
   );
 
   @override
@@ -40,7 +42,7 @@ class Betters extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: BetterAvatar(
         better: better,
-        isBig: true,
+        size: AvatarSize.big,
         mainContext: mainContext,
         isVertical: true,
       )

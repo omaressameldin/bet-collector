@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/Better/BetterAvatar.dart';
 
 class WinnerPickerState extends State<WinnerPicker> {
@@ -17,7 +18,7 @@ class WinnerPickerState extends State<WinnerPicker> {
   final Function(Better) onChanged;
   Better _selected;
 
-  final bool _isBigAvatar = false;
+  final AvatarSize _avatarSize = AvatarSize.small;
   final bool _isVertical = false;
   final Color _activeColor = AppColors.info;
 
@@ -43,7 +44,7 @@ class WinnerPickerState extends State<WinnerPicker> {
       title: BetterAvatar(
         mainContext: mainContext,
         better: better,
-        isBig: _isBigAvatar,
+        size: _avatarSize,
         isVertical: _isVertical,
       ),
       value: better,
@@ -55,7 +56,7 @@ class WinnerPickerState extends State<WinnerPicker> {
       title: BetterAvatar(
         mainContext: mainContext,
         better: accepter,
-        isBig: _isBigAvatar,
+        size: _avatarSize,
         isVertical: _isVertical,
       ),
       value: accepter,

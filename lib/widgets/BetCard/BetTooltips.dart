@@ -4,8 +4,9 @@ import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:intl/intl.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BetTooltips extends StatelessWidget with WidgetHelper {
   BetTooltips({@required this.bet, this.alignment = WrapAlignment.start});
@@ -17,30 +18,25 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
   final double _bottomIconsSize = 15.0;
   final double _iconSpacing = 2.0;
   final IconStyle _expiryDateIconStyle = IconStyle(
-    icon: Icons.event,
+    icon: AppIcons.futureBet,
     color: AppColors.secondary,
   );
   final IconStyle _completedDateIconStyle = IconStyle(
-    icon: Icons.event_available,
+    icon: AppIcons.expiredBet,
     color: AppColors.secondary,
   );
   final IconStyle _runningIcon = IconStyle(
-    icon: Icons.directions_run,
+    icon: AppIcons.runningBets,
     color: AppColors.info,
   );
   final IconStyle _completedIcon = IconStyle(
-    icon: Icons.check_circle,
+    icon: AppIcons.completedBets,
     color: AppColors.success,
   );
   final IconStyle _winnerIcon = IconStyle(
-    icon: MdiIcons.trophy,
+    icon: AppIcons.betWinner,
     color: AppColors.winner,
   );
-  final TextStyle _iconTextStyle = TextStyle(
-    color: AppColors.cardText,
-    fontWeight: FontWeight.bold
-  );
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +68,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
         ),
         Text(
           bet.isCompleted() ? 'Done' : 'Running',
-          style: _iconTextStyle,
+          style: TextStyles.tooltipStyle,
         ),
       ],
     ));
@@ -95,8 +91,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             _dateFormatter.format(
               bet.isCompleted() ?  bet.completionDate : bet.expiryDate,
             ),
-            style: _iconTextStyle
-
+            style: TextStyles.tooltipStyle,
           ),
         ],
       ),
@@ -115,7 +110,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
             color: _winnerIcon.color,
             size: _bottomIconsSize,
           ),
-          Avatar(avatar: bet.winner.avatar, isBig: false),
+          Avatar(avatar: bet.winner.avatar, size: AvatarSize.small),
         ],
       ),
       isLast: true

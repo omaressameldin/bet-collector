@@ -9,9 +9,8 @@ import 'package:long_term_bets/widgets/BetCard/Betters.dart';
 import 'BetTooltips.dart';
 
 class BetPopUp extends StatelessWidget with WidgetHelper, BetsConsumer, BetConsumer {
-  BetPopUp({ @required this.isCompletedList, @required this.mainContext });
+  BetPopUp({ @required this.mainContext });
 
-  final bool isCompletedList;
   final BuildContext mainContext;
 
   @override

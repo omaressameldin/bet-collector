@@ -48,15 +48,23 @@ List<Bet> bets = <Bet>[
 class Bets with ChangeNotifier {
   Bets(): super() {
     _allBets.addAll(bets);
-    _completedBets.add(bets[2]);
+    _wonBets.add(bets[2]);
+    _runningBets.add(bets[0]);
+    _runningBets.add(bets[1]);
   }
 
   final HashSet<Bet> _allBets = HashSet<Bet>();
-  final HashSet<Bet> _completedBets = HashSet<Bet>();
+  final HashSet<Bet> _wonBets = HashSet<Bet>();
+  final HashSet<Bet> _lostBets = HashSet<Bet>();
+  final HashSet<Bet> _runningBets = HashSet<Bet>();
+
 
 
   HashSet<Bet> get allBets => _allBets;
-  HashSet<Bet> get completedBets => _completedBets;
+  HashSet<Bet> get wonBets => _wonBets;
+  HashSet<Bet> get lostBets => _lostBets;
+  HashSet<Bet> get runningBets => _runningBets;
+
 
   void getNewBets() {
     notifyListeners();
@@ -70,7 +78,12 @@ class Bets with ChangeNotifier {
   void markAsCompleted(Bet bet, Better winner) {
     if(_allBets.contains(bet)) {
       bet._markAsCompleted(winner);
-      _completedBets.add(bet);
+      _runningBets.remove(bet);
+      if (winner == getLoggedInBetter()) {
+        _wonBets.add(bet);
+      } else {
+        _lostBets.add(bet);
+      }
     } else {
       throw Exception('Only running bets can be marked as completed');
     }
@@ -79,19 +92,25 @@ class Bets with ChangeNotifier {
   }
 
   void markAsRunning(Bet bet) {
-    if(_allBets.contains(bet) && _completedBets.contains(bet)) {
-      bet._markAsRunning();
-      _completedBets.remove(bet);
-    } else {
+    if (!_allBets.contains(bet) ||
+      (!_wonBets.contains(bet) && !_lostBets.contains(bet))
+    ) {
       throw Exception('Only completed bets can be marked as running');
     }
+
+    _wonBets.remove(bet);
+    _lostBets.remove(bet);
+    bet._markAsRunning();
+    _runningBets.add(bet);
 
     notifyListeners();
   }
 
   void delete(Bet bet) {
     _allBets.remove(bet);
-    _completedBets.remove(bet);
+    _wonBets.remove(bet);
+    _lostBets.remove(bet);
+    _runningBets.remove(bet);
 
     notifyListeners();
   }

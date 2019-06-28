@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetConsumer.dart';
+import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
+import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
@@ -15,15 +18,11 @@ class BetCard extends StatelessWidget with
   BetConsumer,
   BetProvider
 {
-  BetCard({@required this.isCompletedList});
+  BetCard({@required this.betsType});
 
-  final bool isCompletedList;
+  final BetsType betsType;
 
   final Color _iconColor = AppColors.secondary;
-  final TextStyle _titleStyle = TextStyle(
-    color: AppColors.cardTitle,
-    fontWeight: FontWeight.bold
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +45,13 @@ class BetCard extends StatelessWidget with
           children: <Widget>[
             buildDividedContainer(
               true,
-              Avatar(avatar: otherSide.avatar, isBig: true),
+              Avatar(avatar: otherSide.avatar, size: AvatarSize.big),
             )
           ],
         ),
         title: Text(
           bet.description,
-          style: _titleStyle,
+          style: TextStyles.titleStyle,
           maxLines: 2,
         ),
         subtitle: BetTooltips(bet: bet),
@@ -68,13 +67,10 @@ class BetCard extends StatelessWidget with
                   context,
                   provideBet(
                     bet,
-                    BetPopUp(
-                      mainContext: context,
-                      isCompletedList: isCompletedList
-                    )
+                    BetPopUp(mainContext: context),
                   ),
                 ),
-                child: Icon(Icons.keyboard_arrow_up, color: _iconColor, size: 30.0),
+                child: Icon(AppIcons.showPopup, color: _iconColor, size: 30.0),
               )
             )
 
