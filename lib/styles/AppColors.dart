@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 class AppColors {
-static Color primary = Colors.deepPurple[700];
+static Color primary = const Color(0xFF04395e);
 static Color secondary = Colors.blueGrey;
-static Color info = Colors.blue[800];
+static Color funky = const Color(0xFFf29559);
+static Color info = const Color(0xFF3066be);
 static Color success = Colors.teal;
-static Color danger = Colors.redAccent;
+static Color danger = const Color(0xFFe85d75);
 static Color cardTitle = Colors.grey[700];
 static Color cardText = Colors.grey[500];
-static Color buttonText = Colors.grey[300];
-static Color winner = Colors.amber[700];
+static Color buttonText = const Color(0xFFDFE0E2);
+static Color winner = const Color(0xFFf6b036);
 static const Color transparent = Color(0x00000000);
 }

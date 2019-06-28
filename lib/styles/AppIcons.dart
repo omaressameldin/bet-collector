@@ -7,7 +7,7 @@ class AppIcons {
   static IconData expiredBet = Icons.event_available;
   static IconData futureBet = Icons.event;
   static IconData betWinner = MdiIcons.trophy;
-  static IconData betLoser = MdiIcons.emoticonCryOutline;
+  static IconData betLoser = MdiIcons.emoticonSad;
   static IconData vs = Icons.compare_arrows;
   static IconData back = Icons.keyboard_backspace;
   static IconData showPopup = Icons.keyboard_arrow_up;
