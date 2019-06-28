@@ -6,6 +6,7 @@ import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetsList/BetsList.dart';
+import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
 
 void main() => runApp(MyApp());
@@ -77,11 +78,8 @@ class NavigationState extends State<Navigation> with BetsProvider {
             title: Container(height: 0.0),
           ),
           BottomNavigationBarItem(
-            icon: Container(
-              foregroundDecoration: BoxDecoration(
-                color: AppColors.buttonText,
-                backgroundBlendMode: BlendMode.saturation,
-              ),
+            icon: Translucent(
+              shape: BoxShape.circle,
             child: Avatar(size: AvatarSize.medium, avatar: better.avatar),
             ),
             activeIcon: Avatar(size: AvatarSize.medium, avatar: better.avatar),
