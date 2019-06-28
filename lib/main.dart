@@ -45,6 +45,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
       body: provideBets(bets, better, _children[_currentIndex]),
       floatingActionButton: FloatingActionButton.extended(
         elevation: 4.0,
+        backgroundColor: AppColors.funky,
         icon: const Icon(Icons.add),
         label: const Text('Add new'),
         onPressed: () {},
@@ -53,13 +54,13 @@ class NavigationState extends State<Navigation> with BetsProvider {
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8.0,
         currentIndex: _currentIndex,
-        unselectedItemColor: AppColors.secondary,
+        unselectedItemColor: AppColors.buttonText,
         showUnselectedLabels: true,
         onTap: onTabTapped,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(AppIcons.allBets),
-            activeIcon: Icon(AppIcons.allBets, color: AppColors.primary),
+            activeIcon: Icon(AppIcons.allBets, color: AppColors.cardTitle),
             title: Container(height: 0.0),
           ),
           BottomNavigationBarItem(
