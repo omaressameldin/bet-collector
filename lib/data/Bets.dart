@@ -78,6 +78,7 @@ class Bets with ChangeNotifier {
   void markAsCompleted(Bet bet, Better winner) {
     if(_allBets.contains(bet)) {
       bet._markAsCompleted(winner);
+      _runningBets.remove(bet);
       if (winner == getLoggedInBetter()) {
         _wonBets.add(bet);
       } else {
