@@ -3,10 +3,13 @@ import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 mixin WidgetHelper {
   Container buildDividedContainer(bool isBig, Widget child, {bool isLast = false}) {
-    final double rightPadding = isBig ? 12.0 : 6.0;
-    final double leftPadding = isBig ? 0 : 6.0;
+    final double rightPadding = isBig ?
+      AppSizes.bigTitleDividerPadding : AppSizes.smallTitleDividerPadding;
+    final double leftPadding = isBig ?
+      AppSizes.zeroSpacing : AppSizes.smallTitleDividerPadding;
 
     return Container(
           padding: EdgeInsets.only(right: rightPadding, left: leftPadding),

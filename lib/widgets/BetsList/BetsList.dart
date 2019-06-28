@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 import 'package:long_term_bets/widgets/BetsList/EmptyList.dart';
 
@@ -19,7 +20,7 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
     }
 
     return ListView.builder(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(AppSizes.widgetMargin),
         itemBuilder: (BuildContext context, int i) {
           if (i < betsToShow.length) {
             return provideBet(

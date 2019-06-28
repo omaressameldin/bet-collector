@@ -5,6 +5,7 @@ import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:intl/intl.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 
@@ -20,8 +21,6 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
   final Better currentUser;
 
   final DateFormat _dateFormatter = DateFormat('MMM yyyy');
-  final double _bottomIconsSize = 15.0;
-  final double _iconSpacing = 2.0;
   final IconStyle _expiryDateIconStyle = IconStyle(
     icon: AppIcons.futureBet,
     color: AppColors.secondary,
@@ -54,7 +53,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
     }
 
     return Container(
-      padding: const EdgeInsets.only(top: 5.0),
+      padding: EdgeInsets.only(top: AppSizes.widgetMargin),
       child: Wrap(
         alignment: alignment,
         children: tooltips,
@@ -64,12 +63,12 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
 
   Widget _stateTooltip() {
     return buildDividedContainer(false, Wrap(
-      spacing: _iconSpacing,
+      spacing: AppSizes.iconSpacing,
       children: <Widget>[
         Icon(
           bet.isCompleted() ? _completedIcon.icon : _runningIcon.icon,
           color: bet.isCompleted() ? _completedIcon.color : _runningIcon.color,
-          size: _bottomIconsSize,
+          size: AppSizes.smallIconSize,
         ),
         Text(
           bet.isCompleted() ? 'Done' : 'Running',
@@ -85,15 +84,15 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
     return buildDividedContainer(
       false,
       Tooltip(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(AppSizes.widgetMargin),
         message: bet.isCompleted() ? 'Completion Date' : 'Expiration Date',
         child: Wrap(
-          spacing: _iconSpacing,
+          spacing: AppSizes.iconSpacing,
           children: <Widget>[
             Icon(
               dateIconStyle.icon,
               color: dateIconStyle.color,
-              size: _bottomIconsSize,
+              size: AppSizes.smallIconSize
             ),
             Text(
               _dateFormatter.format(
@@ -113,15 +112,15 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
     return buildDividedContainer(
       false,
       Tooltip(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(AppSizes.widgetMargin),
         message: 'Winner: $winnerName',
         child: Wrap(
-        spacing: _iconSpacing,
+        spacing: AppSizes.iconSpacing,
         children: <Widget>[
           Icon(
             _winnerIcon.icon,
             color: _winnerIcon.color,
-            size: _bottomIconsSize,
+            size: AppSizes.smallIconSize
           ),
           Avatar(avatar: bet.winner.avatar, size: AvatarSize.small),
         ],
