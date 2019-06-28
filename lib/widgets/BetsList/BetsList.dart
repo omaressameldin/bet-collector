@@ -3,6 +3,7 @@ import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
+import 'package:long_term_bets/widgets/BetsList/EmptyList.dart';
 
 class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
   BetsList({
@@ -13,6 +14,10 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
 
   Widget _buildCards(BuildContext context) {
     final List<Bet> betsToShow = betsList(context, betsType);
+    if (betsToShow.isEmpty) {
+      return EmptyList();
+    }
+
     return ListView.builder(
         padding: const EdgeInsets.all(5.0),
         itemBuilder: (BuildContext context, int i) {
