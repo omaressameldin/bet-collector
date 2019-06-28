@@ -13,7 +13,7 @@ class BetterAvatar extends StatelessWidget with BetterConsumer {
   });
 
   final Better better;
-  final avatarSize size;
+  final AvatarSize size;
   final bool isVertical;
   final BuildContext mainContext;
 

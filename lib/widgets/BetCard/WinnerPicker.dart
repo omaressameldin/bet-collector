@@ -18,7 +18,7 @@ class WinnerPickerState extends State<WinnerPicker> {
   final Function(Better) onChanged;
   Better _selected;
 
-  final avatarSize _avatarSize = avatarSize.small;
+  final AvatarSize _avatarSize = AvatarSize.small;
   final bool _isVertical = false;
   final Color _activeColor = AppColors.info;
 

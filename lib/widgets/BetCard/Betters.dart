@@ -42,7 +42,7 @@ class Betters extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: BetterAvatar(
         better: better,
-        size: avatarSize.big,
+        size: AvatarSize.big,
         mainContext: mainContext,
         isVertical: true,
       )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-enum avatarSize {
+enum AvatarSize {
     big,
     medium,
     small,
@@ -8,15 +8,15 @@ class Avatar extends StatelessWidget {
   const Avatar({@required this.avatar, @required this.size});
 
   final NetworkImage avatar;
-  final avatarSize size;
+  final AvatarSize size;
 
   @override
   Widget build (BuildContext context) {
     double radius;
     switch(size) {
-      case avatarSize.big: radius = 20.0; break;
-      case avatarSize.medium: radius = 10.0; break;
-      case avatarSize.small: radius = 7.5; break;
+      case AvatarSize.big: radius = 20.0; break;
+      case AvatarSize.medium: radius = 10.0; break;
+      case AvatarSize.small: radius = 7.5; break;
 
     }
     return CircleAvatar(
