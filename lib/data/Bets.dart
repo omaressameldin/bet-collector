@@ -93,7 +93,7 @@ class Bets with ChangeNotifier {
 
   void markAsRunning(Bet bet) {
     if (!_allBets.contains(bet) ||
-      (!_wonBets.contains(bet) && !_lostBets.contains(bets))
+      (!_wonBets.contains(bet) && !_lostBets.contains(bet))
     ) {
       throw Exception('Only completed bets can be marked as running');
     }
