@@ -35,8 +35,8 @@ class BetCard extends StatelessWidget with
 
   ListTile _buildTile(BuildContext context) {
     final Bet bet = consumeBet(context);
-    final Better better = consumeBetter(context);
-    final Better otherSide = bet.getOtherSide(better);
+    final Better currentUser = consumeBetter(context);
+    final Better otherSide = bet.getOtherSide(currentUser);
 
     return ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -54,7 +54,7 @@ class BetCard extends StatelessWidget with
           style: TextStyles.titleStyle,
           maxLines: 2,
         ),
-        subtitle: BetTooltips(bet: bet),
+        subtitle: BetTooltips(bet: bet, currentUser: currentUser),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

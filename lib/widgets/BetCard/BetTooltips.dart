@@ -9,10 +9,15 @@ import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 
 class BetTooltips extends StatelessWidget with WidgetHelper {
-  BetTooltips({@required this.bet, this.alignment = WrapAlignment.start});
+  BetTooltips({
+    @required this.bet,
+    @required this.currentUser,
+    this.alignment = WrapAlignment.start
+  });
 
   final WrapAlignment alignment;
   final Bet bet;
+  final Better currentUser;
 
   final DateFormat _dateFormatter = DateFormat('MMM yyyy');
   final double _bottomIconsSize = 15.0;
@@ -45,7 +50,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
       _dateTooltip(!bet.isCompleted())
     ];
     if (bet.isCompleted()) {
-      tooltips.add(_winnerTooltip());
+      tooltips.add(_winnerTooltip(context));
     }
 
     return Container(
@@ -79,30 +84,38 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
       _expiryDateIconStyle;
     return buildDividedContainer(
       false,
-      Wrap(
-        spacing: _iconSpacing,
-        children: <Widget>[
-          Icon(
-            dateIconStyle.icon,
-            color: dateIconStyle.color,
-            size: _bottomIconsSize,
-          ),
-          Text(
-            _dateFormatter.format(
-              bet.isCompleted() ?  bet.completionDate : bet.expiryDate,
+      Tooltip(
+        padding: const EdgeInsets.all(5.0),
+        message: bet.isCompleted() ? 'Completion Date' : 'Expiration Date',
+        child: Wrap(
+          spacing: _iconSpacing,
+          children: <Widget>[
+            Icon(
+              dateIconStyle.icon,
+              color: dateIconStyle.color,
+              size: _bottomIconsSize,
             ),
-            style: TextStyles.tooltipStyle,
-          ),
-        ],
+            Text(
+              _dateFormatter.format(
+                bet.isCompleted() ?  bet.completionDate : bet.expiryDate,
+              ),
+              style: TextStyles.tooltipStyle,
+            ),
+          ],
+        ),
       ),
       isLast: isLast
     );
   }
 
-  Widget _winnerTooltip() {
+  Widget _winnerTooltip(BuildContext context) {
+    final String winnerName = (currentUser == bet.winner) ? 'You' : bet.winner.name;
     return buildDividedContainer(
       false,
-      Wrap(
+      Tooltip(
+        padding: const EdgeInsets.all(5.0),
+        message: 'Winner: $winnerName',
+        child: Wrap(
         spacing: _iconSpacing,
         children: <Widget>[
           Icon(
@@ -112,6 +125,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
           ),
           Avatar(avatar: bet.winner.avatar, size: AvatarSize.small),
         ],
+      )
       ),
       isLast: true
     );
