@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
@@ -17,7 +18,7 @@ class EmptyList extends StatelessWidget {
               shape: BoxShape.circle,
               child: Image(
                 image: const AssetImage('assets/images/empty.png'),
-                height: 300,
+                height: AppSizes.bigImage,
               ),
             ),
             Text('Nothing to See Here!', style: TextStyles.lightTitleStyle)
