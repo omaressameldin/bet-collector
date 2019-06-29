@@ -13,4 +13,6 @@ class AppIcons {
   static IconData showPopup = Icons.keyboard_arrow_up;
   static IconData edit = Icons.edit;
   static IconData delete = Icons.delete_forever;
+  static IconData bet = Icons.casino;
+  static IconData payment = MdiIcons.gamepadVariant;
 }
