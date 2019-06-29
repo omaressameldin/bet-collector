@@ -17,7 +17,7 @@ class Betters extends StatelessWidget {
 
   final MainAxisAlignment alignment = MainAxisAlignment.center;
   final IconStyle vsIconStyle = IconStyle(
-    color: AppColors.secondary,
+    color: AppColors.funky,
     icon: AppIcons.vs,
   );
 
