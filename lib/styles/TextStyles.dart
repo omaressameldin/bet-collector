@@ -25,4 +25,9 @@ class TextStyles {
     color: AppColors.secondary,
     fontWeight: FontWeight.bold
   );
+  static TextStyle chipStyle = TextStyle(
+    fontSize: 12.0,
+    color: AppColors.white,
+    fontWeight: FontWeight.bold
+  );
 }

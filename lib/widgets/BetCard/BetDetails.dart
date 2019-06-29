@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
-import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
+import 'package:long_term_bets/widgets/TitleChip/TitleChip.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
 class BetDetails extends StatelessWidget with WidgetHelper {
@@ -33,26 +33,21 @@ class BetDetails extends StatelessWidget with WidgetHelper {
         top: AppSizes.widgetMargin,
         bottom: AppSizes.widgetMargin
       ),
-      child: SizedBox(
-        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Wrap(
-              spacing: AppSizes.iconSpacing,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: <Widget>[
-                Icon(icon, color: AppColors.primary,),
-                Text(fieldName, style: TextStyle(color: AppColors.funky))
-              ]
-            ),
-            Text(
+            TitleChip(icon: icon, title: fieldName),
+            Padding(
+              padding: EdgeInsets.only(left: AppSizes.iconSpacing),
+              child: Text(
               field,
               style: TextStyles.detailsStyle,
             ),
+            )
           ],
         )
-      )
+    );
+  }
     );
   }
 
