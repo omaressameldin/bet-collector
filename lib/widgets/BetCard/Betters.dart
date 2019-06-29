@@ -29,7 +29,6 @@ class Betters extends StatelessWidget {
       size: AppSizes.bigIconSize,
     );
     return Container(
-      padding: EdgeInsets.only(top: AppSizes.widgetMargin),
       child: Row(
         mainAxisAlignment: alignment,
         children: <Widget>[
