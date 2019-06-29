@@ -23,6 +23,24 @@ mixin WidgetHelper {
       );
   }
 
+  Widget horizontalDivider() {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: AppSizes.verticalWidgetPadding,
+        bottom: AppSizes.verticalWidgetPadding
+      ),
+      child: Container(
+        height: 3.0,
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(
+            width: 3.0 ,
+            color: AppColors.buttonText
+          ))
+        )
+      )
+    );
+  }
+
   void showBottomModal(BuildContext context, Widget child) {
     showModalBottomSheet<void>(
       context: context,
