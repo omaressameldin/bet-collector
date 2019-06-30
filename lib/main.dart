@@ -43,7 +43,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
         title: const Text('Long Term Bets'),
         backgroundColor: AppColors.primary,
       ),
-      body: provideBets(bets, better, _children[_currentIndex]),
+      body: provideBets(bets, better, _children[_currentIndex % 4]),
       floatingActionButton: FloatingActionButton.extended(
         elevation: AppSizes.elevation,
         backgroundColor: AppColors.funky,

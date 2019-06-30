@@ -26,8 +26,8 @@ mixin WidgetHelper {
   Widget horizontalDivider() {
     return Padding(
       padding: EdgeInsets.only(
-        top: AppSizes.verticalWidgetPadding,
-        bottom: AppSizes.verticalWidgetPadding
+        top: AppSizes.widgetMargin,
+        bottom: AppSizes.widgetMargin
       ),
       child: Container(
         height: 3.0,

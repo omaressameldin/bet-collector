@@ -36,6 +36,7 @@ class BetPopUp extends StatelessWidget with
             Betters(better: bet.better, accepter: bet.accepter, mainContext: mainContext),
             BetActions(mainContext: mainContext, bets: bets, bet: bet),
             BetTooltips(bet: bet, alignment: WrapAlignment.center, currentUser: currentUser),
+            horizontalDivider(),
             BetDetails(bet: bet),
           ]
         )
