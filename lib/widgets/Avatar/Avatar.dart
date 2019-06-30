@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 enum AvatarSize {
     big,
     medium,
@@ -14,9 +15,9 @@ class Avatar extends StatelessWidget {
   Widget build (BuildContext context) {
     double radius;
     switch(size) {
-      case AvatarSize.big: radius = 20.0; break;
-      case AvatarSize.medium: radius = 10.0; break;
-      case AvatarSize.small: radius = 7.5; break;
+      case AvatarSize.big: radius = AppSizes.bigAvatar; break;
+      case AvatarSize.medium: radius = AppSizes.mediumAvatar; break;
+      case AvatarSize.small: radius = AppSizes.smallAvatar; break;
 
     }
     return CircleAvatar(

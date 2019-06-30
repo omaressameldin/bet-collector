@@ -5,6 +5,7 @@ import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/BetCard/WinnerPicker.dart';
 
 class BetActionsState extends State<BetActions> with WidgetHelper{
@@ -31,7 +32,7 @@ class BetActionsState extends State<BetActions> with WidgetHelper{
       mainAxisAlignment: MainAxisAlignment.center,
       children: _actionButtons().map((ActionButton button) {
         return Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding:  EdgeInsets.all(AppSizes.widgetMargin),
           child:button.generateButton()
         );
       }).toList()

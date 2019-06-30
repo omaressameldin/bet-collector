@@ -6,6 +6,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
@@ -27,8 +28,8 @@ class BetCard extends StatelessWidget with
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 8.0,
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      elevation: AppSizes.elevation,
+      margin: EdgeInsets.symmetric(vertical: AppSizes.widgetMargin),
       child: _buildTile(context),
     );
   }
@@ -39,7 +40,10 @@ class BetCard extends StatelessWidget with
     final Better otherSide = bet.getOtherSide(currentUser);
 
     return ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: AppSizes.horizontalWidgetPadding,
+          vertical: AppSizes.verticalWidgetPadding,
+        ),
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -59,8 +63,8 @@ class BetCard extends StatelessWidget with
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ButtonTheme(
-              minWidth: 5.0,
-              padding: const EdgeInsets.all(0),
+              minWidth: AppSizes.minButtonSize,
+              padding: EdgeInsets.all(AppSizes.zeroSpacing),
               shape: const CircleBorder(side: BorderSide.none),
               child: FlatButton(
                 onPressed: () => showBottomModal(
@@ -70,7 +74,11 @@ class BetCard extends StatelessWidget with
                     BetPopUp(mainContext: context),
                   ),
                 ),
-                child: Icon(AppIcons.showPopup, color: _iconColor, size: 30.0),
+                child: Icon(
+                  AppIcons.showPopup,
+                  color: _iconColor,
+                  size: AppSizes.mediumIconSize,
+                ),
               )
             )
 

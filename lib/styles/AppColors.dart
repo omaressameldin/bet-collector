@@ -11,4 +11,5 @@ static Color cardText = Colors.grey[500];
 static Color buttonText = const Color(0xFFDFE0E2);
 static Color winner = const Color(0xFFf6b036);
 static const Color transparent = Color(0x00000000);
+static const Color white = Colors.white;
 }

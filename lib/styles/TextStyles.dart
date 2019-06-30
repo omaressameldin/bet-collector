@@ -12,12 +12,22 @@ class TextStyles {
     color: AppColors.buttonText,
     fontSize: 30.0
   );
+  static TextStyle detailsStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColors.cardText,
+    fontSize: 15.0
+  );
   static TextStyle tooltipStyle = TextStyle(
     color: AppColors.cardText,
     fontWeight: FontWeight.bold
   );
   static TextStyle avatarText = TextStyle(
     color: AppColors.secondary,
+    fontWeight: FontWeight.bold
+  );
+  static TextStyle chipStyle = TextStyle(
+    fontSize: 12.0,
+    color: AppColors.white,
     fontWeight: FontWeight.bold
   );
 }

@@ -4,6 +4,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetsList/BetsList.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
@@ -38,13 +39,13 @@ class NavigationState extends State<Navigation> with BetsProvider {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 8.0,
+        elevation: AppSizes.bigElevation,
         title: const Text('Long Term Bets'),
         backgroundColor: AppColors.primary,
       ),
-      body: provideBets(bets, better, _children[_currentIndex]),
+      body: provideBets(bets, better, _children[_currentIndex % 4]),
       floatingActionButton: FloatingActionButton.extended(
-        elevation: 4.0,
+        elevation: AppSizes.elevation,
         backgroundColor: AppColors.funky,
         icon: const Icon(Icons.add),
         label: const Text('Add new'),
@@ -52,7 +53,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 8.0,
+        elevation: AppSizes.bigElevation,
         currentIndex: _currentIndex,
         unselectedItemColor: AppColors.buttonText,
         showUnselectedLabels: true,
@@ -61,22 +62,22 @@ class NavigationState extends State<Navigation> with BetsProvider {
           BottomNavigationBarItem(
             icon: Icon(AppIcons.allBets),
             activeIcon: Icon(AppIcons.allBets, color: AppColors.cardTitle),
-            title: Container(height: 0.0),
+            title: Container(height: AppSizes.zeroSpacing),
           ),
           BottomNavigationBarItem(
             icon: Icon(AppIcons.runningBets),
-            title: Container(height: 0.0),
+            title: Container(height: AppSizes.zeroSpacing),
             activeIcon: Icon(AppIcons.runningBets, color: AppColors.info),
           ),
           BottomNavigationBarItem(
             icon: Icon(AppIcons.betWinner),
             activeIcon: Icon(AppIcons.betWinner, color: AppColors.winner),
-            title: Container(height: 0.0),
+            title: Container(height: AppSizes.zeroSpacing),
           ),
           BottomNavigationBarItem(
             icon: Icon(AppIcons.betLoser),
             activeIcon: Icon(AppIcons.betLoser, color: AppColors.danger),
-            title: Container(height: 0.0),
+            title: Container(height: AppSizes.zeroSpacing),
           ),
           BottomNavigationBarItem(
             icon: Translucent(

@@ -3,6 +3,7 @@ import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
+import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/Better/BetterAvatar.dart';
 
@@ -15,17 +16,19 @@ class Betters extends StatelessWidget {
   final BuildContext mainContext;
 
   final MainAxisAlignment alignment = MainAxisAlignment.center;
-  final double iconSize = 50.0;
   final IconStyle vsIconStyle = IconStyle(
-    color: AppColors.secondary,
+    color: AppColors.funky,
     icon: AppIcons.vs,
   );
 
   @override
   Widget build(BuildContext context) {
-    final Icon vsIcon = Icon(vsIconStyle.icon, color: vsIconStyle.color, size: iconSize);
+    final Icon vsIcon = Icon(
+      vsIconStyle.icon,
+      color: vsIconStyle.color,
+      size: AppSizes.bigIconSize,
+    );
     return Container(
-      padding: const EdgeInsets.only(top: 5.0),
       child: Row(
         mainAxisAlignment: alignment,
         children: <Widget>[
@@ -39,7 +42,7 @@ class Betters extends StatelessWidget {
 
   Widget _avatar(Better better) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(AppSizes.widgetMargin),
       child: BetterAvatar(
         better: better,
         size: AvatarSize.big,
