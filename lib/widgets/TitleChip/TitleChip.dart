@@ -11,7 +11,7 @@ class TitleChip extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Chip(
-      elevation: AppSizes.elevation,
+      elevation: AppSizes.smallElevation,
       padding: EdgeInsets.all(AppSizes.zeroSpacing),
       backgroundColor: AppColors.funky,
       avatar: CircleAvatar(
