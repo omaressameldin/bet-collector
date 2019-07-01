@@ -8,6 +8,7 @@ class AppSizes {
   static double minButtonSize = 5.0;
   static double bigElevation = 8.0;
   static double elevation = 4.0;
+  static double smallElevation = 2.0;
   static double iconSpacing = 2.0;
   static double bigTitleDividerPadding = 12.0;
   static double smallTitleDividerPadding = 6.0;

@@ -30,7 +30,10 @@ class BetDetails extends StatelessWidget {
 
   Widget _field(String field, IconData icon, String fieldName) {
     return Padding(
-      padding: EdgeInsets.only(bottom: AppSizes.iconSpacing),
+      padding: EdgeInsets.only(
+        bottom: AppSizes.iconSpacing,
+        left: AppSizes.widgetMargin
+      ),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -50,9 +53,8 @@ class BetDetails extends StatelessWidget {
   }
 
   Widget _fields(List<Widget> children) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      primary: false,
       children: children,
     );
   }
