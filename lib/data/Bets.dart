@@ -114,6 +114,22 @@ class Bets with ChangeNotifier {
 
     notifyListeners();
   }
+
+
+  void add(Bet bet, Better currentUser, {int index = -1}) {
+    _allBets.add(bet);
+    if(bet.isCompleted()) {
+      if (bet.winner == currentUser) {
+        _wonBets.add(bet);
+      } else {
+        _lostBets.add(bet);
+      }
+    } else {
+      _runningBets.add(bet);
+    }
+
+    notifyListeners();
+  }
 }
 
 class Bet with ChangeNotifier {

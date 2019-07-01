@@ -25,7 +25,7 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
           if (i < betsToShow.length) {
             return provideBet(
               betsToShow[i],
-              BetCard(betsType: betsType)
+              BetCard()
             );
           }
         });

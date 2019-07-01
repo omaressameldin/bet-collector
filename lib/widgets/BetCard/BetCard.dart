@@ -9,6 +9,8 @@ import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
+import 'package:long_term_bets/widgets/BetCard/BetActions.dart';
+import 'package:long_term_bets/widgets/BetCard/BetSlidable.dart';
 import 'package:long_term_bets/widgets/BetCard/BetTooltips.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/widgets/BetCard/BetPopUp.dart';
@@ -17,25 +19,29 @@ class BetCard extends StatelessWidget with
   WidgetHelper,
   BetterConsumer,
   BetConsumer,
+  BetsConsumer,
   BetProvider
 {
-  BetCard({@required this.betsType});
-
-  final BetsType betsType;
-
   final Color _iconColor = AppColors.secondary;
 
   @override
   Widget build(BuildContext context) {
+    final Bet bet = consumeBet(context);
+    final Bets bets = consumeBets(context);
+
     return Card(
       elevation: AppSizes.elevation,
       margin: EdgeInsets.symmetric(vertical: AppSizes.widgetMargin),
-      child: _buildTile(context),
+      child: BetSlidable(
+        bets: bets,
+        bet: bet,
+        mainContext: context,
+        card: _buildTile(context, bet),
+      )
     );
   }
 
-  ListTile _buildTile(BuildContext context) {
-    final Bet bet = consumeBet(context);
+  ListTile _buildTile(BuildContext context, Bet bet) {
     final Better currentUser = consumeBetter(context);
     final Better otherSide = bet.getOtherSide(currentUser);
 
@@ -58,7 +64,7 @@ class BetCard extends StatelessWidget with
           style: TextStyles.titleStyle,
           maxLines: 2,
         ),
-        subtitle: BetTooltips(bet: bet, currentUser: currentUser),
+        subtitle: BetTooltips(bet: bet),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -81,7 +87,6 @@ class BetCard extends StatelessWidget with
                 ),
               )
             )
-
           ]
         )
     );

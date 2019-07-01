@@ -9,7 +9,7 @@ enum BetsType {
   lost
 }
 
-mixin BetsConsumer on Widget {
+mixin BetsConsumer {
   Bets consumeBets(BuildContext context) => Provider.of<Bets>(context);
 
   List<Bet> betsList(BuildContext context, BetsType type) {

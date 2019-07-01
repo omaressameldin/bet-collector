@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
@@ -9,16 +10,16 @@ import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 
-class BetTooltips extends StatelessWidget with WidgetHelper {
+class BetTooltips extends StatelessWidget with WidgetHelper, BetterConsumer {
   BetTooltips({
     @required this.bet,
-    @required this.currentUser,
-    this.alignment = WrapAlignment.start
+    this.alignment = WrapAlignment.start,
+    this.context,
   });
 
   final WrapAlignment alignment;
   final Bet bet;
-  final Better currentUser;
+  final BuildContext context;
 
   final DateFormat _dateFormatter = DateFormat('MMM yyyy');
   final IconStyle _expiryDateIconStyle = IconStyle(
@@ -44,6 +45,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
 
   @override
   Widget build(BuildContext context) {
+    context = this.context != null ? this.context : context;
     final List<Widget> tooltips = <Widget>[
       _stateTooltip(),
       _dateTooltip(!bet.isCompleted())
@@ -108,6 +110,7 @@ class BetTooltips extends StatelessWidget with WidgetHelper {
   }
 
   Widget _winnerTooltip(BuildContext context) {
+    final Better currentUser = consumeBetter(context);
     final String winnerName = (currentUser == bet.winner) ? 'You' : bet.winner.name;
     return buildDividedContainer(
       false,
