@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
+import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/data/Better.dart';
 import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetsList/BetsList.dart';
+import 'package:long_term_bets/widgets/NewBet/NewBetPage.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with BetsProvider {
   @override
   Widget build(BuildContext context) {
+    final Bets bets = Bets();
+    final Better better = bets.getLoggedInBetter();
 
     return MaterialApp(
       title: 'Long Term Bets',
-      home: Navigation()
+      home: provideBets(bets, better, Navigation()),
     );
   }
 }
 
-class NavigationState extends State<Navigation> with BetsProvider {
+class NavigationState extends State<Navigation> with BetterConsumer {
   int _currentIndex = 0;
   final List<Widget> _children = <Widget>[
     BetsList(betsType: BetsType.all),
@@ -34,8 +39,7 @@ class NavigationState extends State<Navigation> with BetsProvider {
 
   @override
   Widget build(BuildContext context) {
-    final Bets bets = Bets();
-    final Better better = bets.getLoggedInBetter();
+    final Better better = consumeBetter(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -43,13 +47,13 @@ class NavigationState extends State<Navigation> with BetsProvider {
         title: const Text('Long Term Bets'),
         backgroundColor: AppColors.primary,
       ),
-      body: provideBets(bets, better, _children[_currentIndex % 4]),
+      body:  _children[_currentIndex % 4],
       floatingActionButton: FloatingActionButton.extended(
         elevation: AppSizes.elevation,
         backgroundColor: AppColors.funky,
         icon: const Icon(Icons.add),
         label: const Text('Add new'),
-        onPressed: () {},
+        onPressed: () => NewBetPage.addNewBet(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(

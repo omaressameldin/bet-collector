@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/data/Better.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
@@ -16,7 +17,6 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
   Better _currentUser;
 
   final Color contentColor = AppColors.buttonText;
-  final bool isFlat = false;
 
   @override
   void initState() {
@@ -44,7 +44,6 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
       text: text,
       color: background,
       iconStyle: IconStyle(color: contentColor, icon: icon),
-      isFlat: isFlat,
       onPressed: onPressed,
     );
   }
@@ -100,5 +99,5 @@ abstract class BetActions extends StatefulWidget {
   final BuildContext mainContext;
 
   @override
-  BetActionsState createState();
+  BetActionsState<BetActions> createState();
 }

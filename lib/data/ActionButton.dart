@@ -8,7 +8,9 @@ class ActionButton {
     @required this.text,
     @required this.color,
     @required this.onPressed,
-    @required this.isFlat,
+    this.isFlat = false,
+    this.isReversed = false,
+    this.isBig = false,
     this.iconStyle,
   });
 
@@ -17,13 +19,18 @@ class ActionButton {
   final IconStyle iconStyle;
   final Function onPressed;
   final bool isFlat;
+  final bool isReversed;
+  final bool isBig;
 
   ButtonTheme generateButton({Function callback}) {
     final Wrap buttonContent = Wrap(
       spacing: AppSizes.iconSpacing,
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[Text(text, style: TextStyles.actionButton),
+      children: <Widget>[Text(
+        text,
+        textAlign: TextAlign.center,
+        style: isBig ? TextStyles.bigActionButton : TextStyles.actionButton ),
       ],
     );
     final Function pressedFn = () {
@@ -37,14 +44,19 @@ class ActionButton {
       RaisedButton(onPressed: pressedFn, child: buttonContent);
     if (iconStyle != null) {
       buttonContent.children.insert(
-          0,
-          Icon(iconStyle.icon, color: iconStyle.color, size: AppSizes.smallIconSize),
+          isReversed ? buttonContent.children.length : 0,
+          Icon(
+            iconStyle.icon,
+            color: iconStyle.color,
+            size: isBig ? AppSizes.mediumIconSize : AppSizes.smallIconSize,
+            ),
         );
     }
     return ButtonTheme(
       minWidth: AppSizes.minButtonSize,
       buttonColor: color,
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.bigButtonPadding),
+      padding: isFlat ? const EdgeInsets.all(0) :
+        EdgeInsets.symmetric(horizontal: AppSizes.bigButtonPadding),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.rectangleButtonRadius)
       ),

@@ -28,6 +28,7 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
               BetCard()
             );
           }
+          return null;
         });
   }
 
