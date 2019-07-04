@@ -2,21 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:long_term_bets/consumers/BetConsumer.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
-import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
-import 'package:long_term_bets/widgets/BetCard/BetActions.dart';
 import 'package:long_term_bets/widgets/BetCard/BetDetails.dart';
 import 'package:long_term_bets/widgets/BetCard/Betters.dart';
+import 'BetActionButtons.dart';
 import 'BetTooltips.dart';
 
-class BetPopUp extends StatelessWidget with
-  WidgetHelper,
-  BetsConsumer,
-  BetConsumer,
-  BetterConsumer
-{
+class BetPopUp extends StatelessWidget with WidgetHelper, BetsConsumer, BetConsumer {
   BetPopUp({ @required this.mainContext });
 
   final BuildContext mainContext;
@@ -25,7 +19,6 @@ class BetPopUp extends StatelessWidget with
   Widget build(BuildContext context) {
     final Bets bets = consumeBets(mainContext);
     final Bet bet = consumeBet(context);
-    final Better currentUser = consumeBetter(mainContext);
 
     return SingleChildScrollView(
       child: Padding(
@@ -34,8 +27,8 @@ class BetPopUp extends StatelessWidget with
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Betters(better: bet.better, accepter: bet.accepter, mainContext: mainContext),
-            BetActions(mainContext: mainContext, bets: bets, bet: bet),
-            BetTooltips(bet: bet, alignment: WrapAlignment.center, currentUser: currentUser),
+            BetActionButtons(mainContext: mainContext, bets: bets, bet: bet),
+            BetTooltips(bet: bet, alignment: WrapAlignment.center, context: mainContext),
             horizontalDivider(),
             BetDetails(bet: bet),
           ]

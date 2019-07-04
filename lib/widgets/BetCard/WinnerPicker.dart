@@ -69,12 +69,12 @@ class WinnerPickerState extends State<WinnerPicker> {
 }
 
 class WinnerPicker extends StatefulWidget {
-  const WinnerPicker({
+  WinnerPicker({
     @required this.better,
     @required this.accepter,
     @required this.context,
     @required this.onChanged,
-  });
+  }): super(key: UniqueKey());
 
   final Better better;
   final Better accepter;

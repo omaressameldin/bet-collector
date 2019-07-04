@@ -48,38 +48,46 @@ mixin WidgetHelper {
     );
   }
 
-Future<void> showAlert(
-  BuildContext context,
-  String title,
-  Widget child,
-  List<ActionButton> actions,
-) async {
-  final Function dismissAlert = () => Navigator.of(context).pop();
+  Future<void> showAlert(
+    BuildContext context,
+    String title,
+    Widget child,
+    List<ActionButton> actions,
+  ) async {
+    final Function dismissAlert = () => Navigator.of(context).pop();
 
-  final List<ButtonTheme> actionButtons = actions.map((ActionButton button) =>
-    button.generateButton(callback: dismissAlert)
-  ).toList();
+    final List<ButtonTheme> actionButtons = actions.map((ActionButton button) =>
+      button.generateButton(callback: dismissAlert)
+    ).toList();
 
-  actionButtons.add(ActionButton(
-    isFlat: true,
-    onPressed: dismissAlert,
-    text: 'Discard',
-    color: AppColors.transparent,
-    iconStyle: IconStyle(icon: AppIcons.back, color: AppColors.buttonText)
+    actionButtons.add(ActionButton(
+      isFlat: true,
+      onPressed: dismissAlert,
+      text: 'Discard',
+      color: AppColors.transparent,
+      iconStyle: IconStyle(icon: AppIcons.back, color: AppColors.buttonText)
     ).generateButton());
 
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (_) {
-      return AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(
-          child: child,
-        ),
-        actions: actionButtons,
-      );
-    },
-  );
-}
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (_) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: child,
+          ),
+          actions: actionButtons,
+        );
+      },
+    );
+  }
+
+  void showSnackBar(String text, BuildContext context, {SnackBarAction action} ) {
+    final Widget snackBar = SnackBar(
+      content: Text(text),
+      action: action,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
 }

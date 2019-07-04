@@ -27,6 +27,7 @@ dependencies:
   provider: ^3.0.0+1
   material_design_icons_flutter: 3.2.3695
   intl: ^0.15.8
+  flutter_slidable: "^0.5.3"
 
 dev_dependencies:
   flutter_test:
