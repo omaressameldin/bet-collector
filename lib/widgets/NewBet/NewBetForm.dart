@@ -89,9 +89,6 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
   }
 
   Widget _submitButton() {
-    print(_description);
-    print(_payment);
-    print(_expiry);
     final String buttonText = _step < _maxStep ? 'NextStep' : 'Create Bet';
 
     return ActionButton(

@@ -84,7 +84,6 @@ class Bets with ChangeNotifier {
 
   void add(Bet bet, Better currentUser, {int index = -1}) {
     _allBets.add(bet);
-    print(_allBets.length);
     if(bet.isCompleted()) {
       if (bet.winner == currentUser) {
         _wonBets.add(bet);
