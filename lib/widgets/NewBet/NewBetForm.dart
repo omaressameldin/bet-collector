@@ -117,7 +117,7 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
           payment: _payment,
           expiryDate: _expiry,
           accepter: _better,
-          id: '123123' //TODO: needs to be dynamic from backend!
+          id: '${bets.allBets.length}' //TODO: needs to be dynamic from backend!
         );
 
         bets.add(bet, currentUser);
