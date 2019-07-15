@@ -20,4 +20,5 @@ class AppSizes {
   static double smallIconSize = 15.0;
   static double bigImage = 300.0;
   static double mediumImage = 180.0;
+  static double smallLoaderSize = 20.0;
 }

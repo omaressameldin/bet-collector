@@ -6,7 +6,7 @@ import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/widgets/BetCard/BetActions.dart';
 
-class BetSlidableState<T extends BetSlidable> extends BetActionsState<BetSlidable> {
+class BetSlidableState extends BetActionsState<BetSlidable> {
 
   @override
   Widget build(BuildContext context) {

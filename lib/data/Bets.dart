@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/data/Better.dart';
 // TODO: Remove once backend is connected
 Better better1 = Better(
   id: '1',
@@ -14,44 +15,9 @@ Better better2 = Better(
 );
 
 // TODO: Remove once backend is connected
-List<Bet> bets = <Bet>[
-      Bet(
-        id: '1',
-        better: better1,
-        winner: better1,
-        accepter: better2,
-        description: 'shadwa will stay thin after marriage',
-        payment: 'Omar will go down on shadwa for thirty minutes',
-        expiryDate: DateTime(2024, 1, 1)
-      ),
-      Bet(
-        id: '2',
-        better: better2,
-        winner: better1,
-        accepter: better1,
-        description: 'Aley is gonna live outside of Egypt',
-        payment: 'Shadwa will give Omar a lapdance',
-        expiryDate: DateTime(2022, 1, 1)
-      ),
-      Bet(
-        id: '3',
-        better: better2,
-        winner: better2,
-        accepter: better1,
-        description: 'Aley will finish university soon',
-        payment: 'Omar Will give shadwa 10\$',
-        expiryDate: DateTime(2019, 1, 1),
-        completionDate: DateTime(2018, 6, 1)
-      )
-    ];
+List<Bet> bets = <Bet>[];
 
 class Bets with ChangeNotifier {
-  Bets(): super() {
-    _allBets.addAll(bets);
-    _wonBets.add(bets[2]);
-    _runningBets.add(bets[0]);
-    _runningBets.add(bets[1]);
-  }
 
   final HashSet<Bet> _allBets = HashSet<Bet>();
   final HashSet<Bet> _wonBets = HashSet<Bet>();
@@ -118,6 +84,7 @@ class Bets with ChangeNotifier {
 
   void add(Bet bet, Better currentUser, {int index = -1}) {
     _allBets.add(bet);
+    print(_allBets.length);
     if(bet.isCompleted()) {
       if (bet.winner == currentUser) {
         _wonBets.add(bet);
@@ -188,25 +155,4 @@ class Bet with ChangeNotifier {
       return better;
     }
   }
-}
-
-
-class Better {
-  Better({
-    @required this.id,
-    @required this.name,
-    @required this.avatar,
-  });
-
-  final String id;
-  final String name;
-  final NetworkImage avatar;
-
- @override
-  bool operator ==(dynamic other) {
-    return other is Better && other.id == id;
-  }
-
-  @override
-  int get hashCode => id.hashCode;
 }

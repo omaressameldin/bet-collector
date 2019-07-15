@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/data/Better.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';

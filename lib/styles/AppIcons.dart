@@ -10,9 +10,13 @@ class AppIcons {
   static IconData betLoser = MdiIcons.emoticonSad;
   static IconData vs = Icons.compare_arrows;
   static IconData back = Icons.keyboard_backspace;
+  static IconData next = MdiIcons.handPointingRight;
+  static IconData prev = MdiIcons.handPointingLeft;
   static IconData showPopup = Icons.keyboard_arrow_up;
   static IconData edit = Icons.edit;
   static IconData delete = Icons.delete_forever;
   static IconData bet = Icons.casino;
   static IconData payment = MdiIcons.gamepadVariant;
+  static IconData better = MdiIcons.accountPlus;
+  static IconData exit = Icons.close;
 }
