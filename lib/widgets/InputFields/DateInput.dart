@@ -11,7 +11,8 @@ class DateInput extends StatelessWidget {
     @required this.validationFn,
     @required this.labelText,
     @required this.hintText,
-    @required this.icon
+    @required this.icon,
+    @required this.initialValue,
   });
 
   final FocusNode focusNode;
@@ -19,6 +20,7 @@ class DateInput extends StatelessWidget {
   final String labelText;
   final String hintText;
   final IconData icon;
+  final DateTime initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class DateInput extends StatelessWidget {
     return DateTimePickerFormField(
     inputType: InputType.both,
     format: DateFormat("EE, MMM d, yyyy 'at' h:mma"),
+    initialValue: initialValue,
     focusNode: focusNode,
     editable: false,
     resetIcon: null,

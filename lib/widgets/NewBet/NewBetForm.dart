@@ -63,9 +63,10 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
                 )
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  _submitButton(),
+                  _backButton(),
+                  _nextButton(),
                 ],
               ),
             ],
@@ -77,9 +78,21 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
 
   Widget _renderField() {
     switch(_step) {
-      case 1: return AddDescription(setDescription: setDescription, focusNode: _focusNode);
-      case 2: return AddPayment(setPayment: setPayment, focusNode: _focusNode);
-      case 3: return AddExpiry(setExpiry: setExpiry, focusNode: _focusNode);
+      case 1: return AddDescription(
+        setDescription: setDescription,
+        focusNode: _focusNode,
+        description: _description,
+      );
+      case 2: return AddPayment(
+        setPayment: setPayment,
+        focusNode: _focusNode,
+        payment: _payment,
+      );
+      case 3: return AddExpiry(
+        setExpiry: setExpiry,
+        focusNode: _focusNode,
+        expiry: _expiry,
+      );
       default: return AddBetter(
         better: _better,
         setBetter: setBetter,
@@ -88,17 +101,31 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
     }
   }
 
-  Widget _submitButton() {
-    final String buttonText = _step < _maxStep ? 'NextStep' : 'Create Bet';
+  Widget _nextButton() {
+    final String buttonText = _step < _maxStep ? 'Next Step' : 'Create Bet';
 
     return ActionButton(
       isFlat: true,
       isReversed: true,
       isBig: true,
       onPressed: _nextStep,
-      text: '$buttonText \n $_step/$_maxStep',
+      text: '$buttonText \n ${_step + 1}/${_maxStep + 1}',
       color: AppColors.formButton,
       iconStyle: IconStyle(icon: AppIcons.next, color: AppColors.buttonText)
+    ).generateButton();
+  }
+
+  Widget _backButton() {
+    final String buttonText = _step > 1 ? 'Prev Step \n ${_step - 1}/${_maxStep + 1}' :
+      'Exit';
+
+    return ActionButton(
+      isFlat: true,
+      isBig: true,
+      onPressed: _prevStep,
+      text: buttonText,
+      color: AppColors.formButton,
+      iconStyle: IconStyle(icon: AppIcons.prev, color: AppColors.buttonText)
     ).generateButton();
   }
 
@@ -121,8 +148,16 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
         );
 
         bets.add(bet, currentUser);
-        widget.onCreate();
+        widget.onDone();
       }
+    }
+  }
+
+  void _prevStep() {
+    if (_step > 1) {
+      setState(() => _step--);
+    } else {
+      widget.onDone();
     }
   }
 
@@ -137,11 +172,11 @@ class NewBetFormState extends State<NewBetForm> with BetterConsumer, BetsConsume
 
 class NewBetForm extends StatefulWidget {
   const NewBetForm({
-    @required this.onCreate,
+    @required this.onDone,
     @required this.appContext,
   });
 
-  final Function onCreate;
+  final Function onDone;
   final BuildContext appContext;
 
   @override
