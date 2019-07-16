@@ -85,7 +85,7 @@ class NewBetPage extends PageRoute<void> {
       context,
       NewBetPage(builder: (_) =>  NewBetForm(
         appContext: context,
-        onCreate: () => _close(context),
+        onDone: () => _close(context),
       )),
     );
   }

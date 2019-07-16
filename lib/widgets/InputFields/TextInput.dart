@@ -9,7 +9,8 @@ class TextInput extends StatelessWidget {
     @required this.validationFn,
     @required this.labelText,
     @required this.hintText,
-    @required this.icon
+    @required this.icon,
+    @required this.initialValue,
   });
 
   final FocusNode focusNode;
@@ -17,6 +18,7 @@ class TextInput extends StatelessWidget {
   final String labelText;
   final String hintText;
   final IconData icon;
+  final String initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TextInput extends StatelessWidget {
       minLines: 1,
       maxLines: 10,
       maxLength: 256,
+      initialValue: initialValue,
       validator: validationFn,
       cursorColor: AppColors.textInput,
       style: TextStyles.inputStyle,

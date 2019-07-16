@@ -4,15 +4,21 @@ import 'package:long_term_bets/widgets/InputFields/TextInput.dart';
 
 class AddDescription extends StatelessWidget {
 
-  const AddDescription({@required this.setDescription, @required this.focusNode});
+  const AddDescription({
+    @required this.setDescription,
+    @required this.focusNode,
+    @required this.description,
+  });
 
   final Function(String) setDescription;
   final FocusNode focusNode;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return TextInput(
       focusNode: focusNode,
+      initialValue: description,
       validationFn: _validateDescription,
       labelText: 'Description',
       hintText: 'Enter the bet description',
