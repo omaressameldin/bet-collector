@@ -62,8 +62,16 @@ class NewBetPage extends PageRoute<void> {
     return GestureDetector(
       onTap: () => _close(context),
       child: Container(
+        padding: EdgeInsets.only(
+          right: AppSizes.verticalWidgetPadding,
+          top: AppSizes.horizontalWidgetPadding,
+        ),
         alignment: Alignment.centerRight,
-        child: Icon(AppIcons.exit, color: AppColors.buttonText)
+        child: Icon(
+          AppIcons.exit,
+          color: AppColors.buttonText,
+          size: AppSizes.mediumIconSize,
+        ),
       ),
     );
   }
