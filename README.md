@@ -3,7 +3,7 @@
 **Bet Collector** is a mobile app for saving long term bets between friends
 
 ## What this is
-- The front end of the appliction in the shape of a mobile app build on [flutter](https://flutter.dev/)
+- The front end of the appliction in the shape of a mobile app built using [flutter](https://flutter.dev/)
 
 - The app mainly uses [flutter's own material design widgets](https://flutter.dev/docs/development/ui/widgets/material)
 
@@ -29,7 +29,7 @@
 - For style related values please add the new value to the corresponding file inside [Styles folder](./lib/styles)
 - [Provider package](https://pub.dev/packages/provider) is used for sharing data between widgets. Please take a look before any contribution
 - Always keep your widgets small
-- Try to reuse your widgets as much as possible for reference check:
+- Don't be afraid to use inheritence when needed but also keep in mind that the best practice is to re use widgets instead of extending a widget:
   - [BetActions.dart](./lib/widgets/BetCard/BetActions.dart) (abstract class)
   - [BetSlidable.dart](./lib/widgets/BetCard/BetSlidable.dart)
   - [BetActionButtons.dart](./lib/widgets/BetCard/BetActionButtons.dart)
