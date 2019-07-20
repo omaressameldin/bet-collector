@@ -48,7 +48,9 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
     );
   }
 
-  void editBet() {}
+  void editBet() {
+    widget.onEdit();
+  }
 
   void deleteBet() {
     widget.bets.delete(widget.bet);
@@ -92,11 +94,13 @@ abstract class BetActions extends StatefulWidget {
     @required this.bets,
     @required this.bet,
     @required this.mainContext,
+    this.onEdit,
   }): super(key: UniqueKey());
 
   final Bets bets;
   final Bet bet;
   final BuildContext mainContext;
+  final Function onEdit;
 
   @override
   BetActionsState<BetActions> createState();
