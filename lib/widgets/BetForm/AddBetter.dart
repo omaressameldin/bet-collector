@@ -4,6 +4,7 @@ import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
+import 'package:long_term_bets/widgets/InputFields/BasicInput/Input.dart';
 import 'package:long_term_bets/widgets/InputFields/SearchField/SearchInput.dart';
 
 class AddBetter extends StatelessWidget {
@@ -12,11 +13,13 @@ class AddBetter extends StatelessWidget {
     @required this.setBetter,
     @required this.focusNode,
     @required this.better,
+    @required this.inputSize
   });
 
   final void Function(Better) setBetter;
   final FocusNode focusNode;
   final Better better;
+  final InputSize inputSize;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,9 @@ class AddBetter extends StatelessWidget {
       buildFn : _buildResult,
       filterFn: _filterBetters,
       onSelect: setBetter,
-      value: better != null ? better.name : null,
+      initalSelected: better,
+      textValue: better != null ? better.name : null,
+      inputSize: inputSize,
     );
   }
 
@@ -50,7 +55,7 @@ class AddBetter extends StatelessWidget {
         spacing: AppSizes.widgetMargin,
         children: <Widget>[
           Avatar(avatar: better.avatar, size: AvatarSize.big),
-          Text(better.name, style: TextStyles.inputStyle)
+          Text(better.name, style: TextStyles.inputStyle(inputSize))
         ],
       ),
     );

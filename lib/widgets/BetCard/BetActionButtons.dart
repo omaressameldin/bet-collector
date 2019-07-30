@@ -69,10 +69,12 @@ class BetActionButtons extends BetActions {
     @required Bets bets,
     @required Bet bet,
     @required BuildContext mainContext,
+    @required Function onEdit
   }): super(
     bets: bets,
     bet: bet,
-    mainContext: mainContext
+    mainContext: mainContext,
+    onEdit: onEdit,
   );
 
   @override

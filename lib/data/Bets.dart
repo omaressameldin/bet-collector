@@ -102,28 +102,42 @@ class Bet with ChangeNotifier {
   Bet({
     @required this.id,
     @required this.better,
-    @required this.accepter,
-    @required this.description,
-    @required this.payment,
-    @required this.expiryDate,
-    this.completionDate,
-    this.winner,
-  });
+    @required Better accepter,
+    @required String description,
+    @required String payment,
+    @required DateTime expiryDate,
+    DateTime completionDate,
+    Better winner,
+  }) {
+    _payment = payment;
+    _description = description;
+    _expiryDate = expiryDate;
+    _completionDate = completionDate;
+    _winner = winner;
+    _accepter = accepter;
+  }
 
   final String id;
   final Better better;
-  final Better accepter;
-  String description;
-  String payment;
-  DateTime expiryDate;
-  DateTime completionDate;
-  Better winner;
+  Better _accepter;
+  String _description;
+  String _payment;
+  DateTime _expiryDate;
+  DateTime _completionDate;
+  Better _winner;
 
 
   @override
   bool operator ==(dynamic other) {
     return other is Bet && other.id == id;
   }
+
+  String get description => _description;
+  String get payment => _payment;
+  DateTime get expiryDate => _expiryDate;
+  DateTime get completionDate => _completionDate;
+  Better get winner => _winner;
+  Better get accepter => _accepter;
 
   @override
   int get hashCode => id.hashCode;
@@ -133,14 +147,14 @@ class Bet with ChangeNotifier {
       throw Exception('Only accepter or better can win a bet!');
     }
 
-    this.winner = winner;
-    completionDate = DateTime.now();
+    _winner = winner;
+    _completionDate = DateTime.now();
     notifyListeners();
   }
 
     void _markAsRunning() {
-    completionDate = null;
-    winner = null;
+    _completionDate = null;
+    _winner = null;
 
     notifyListeners();
   }
@@ -153,5 +167,26 @@ class Bet with ChangeNotifier {
     } else {
       return better;
     }
+  }
+
+  void editBetInfo({
+    @required String description,
+    @required String payment,
+    @required DateTime expiryDate,
+    @required Better accepter,
+  }) {
+    if (description != null) {
+      _description = description;
+    }
+    if (payment != null) {
+      _payment = payment;
+    }
+    if(expiryDate != null) {
+      _expiryDate = expiryDate;
+    }
+    if(accepter != null) {
+      _accepter = accepter;
+    }
+    notifyListeners();
   }
 }

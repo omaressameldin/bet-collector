@@ -10,6 +10,7 @@ class ActionButton {
     @required this.onPressed,
     this.isFlat = false,
     this.isReversed = false,
+    this.hasPadding = true,
     this.isBig = false,
     this.iconStyle,
   });
@@ -21,6 +22,7 @@ class ActionButton {
   final bool isFlat;
   final bool isReversed;
   final bool isBig;
+  final bool hasPadding;
 
   ButtonTheme generateButton({Function callback}) {
     final Wrap buttonContent = Wrap(
@@ -55,8 +57,8 @@ class ActionButton {
     return ButtonTheme(
       minWidth: AppSizes.minButtonSize,
       buttonColor: color,
-      padding: isFlat ? const EdgeInsets.all(0) :
-        EdgeInsets.symmetric(horizontal: AppSizes.bigButtonPadding),
+      padding: hasPadding ? EdgeInsets.symmetric(horizontal: AppSizes.bigButtonPadding) :
+        const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.rectangleButtonRadius)
       ),

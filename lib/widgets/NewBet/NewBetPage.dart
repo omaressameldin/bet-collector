@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
-import 'package:long_term_bets/widgets/NewBet/NewBetForm.dart';
+import 'package:long_term_bets/widgets/BetForm/BetForm.dart';
+import 'package:long_term_bets/widgets/Close/Close.dart';
+import 'package:long_term_bets/widgets/InputFields/BasicInput/Input.dart';
 
 class NewBetPage extends PageRoute<void> {
   NewBetPage({
@@ -59,20 +62,20 @@ class NewBetPage extends PageRoute<void> {
   }
 
   Widget _renderCloseIcon(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _close(context),
-      child: Container(
+    return Container(
         padding: EdgeInsets.only(
           right: AppSizes.verticalWidgetPadding,
           top: AppSizes.horizontalWidgetPadding,
         ),
         alignment: Alignment.centerRight,
-        child: Icon(
-          AppIcons.exit,
-          color: AppColors.buttonText,
-          size: AppSizes.mediumIconSize,
+        child: Close(
+          onClose: () => _close(context),
+          icon: IconStyle(
+            color: AppColors.buttonText,
+            icon: AppIcons.exit,
+          ),
         ),
-      ),
+
     );
   }
 
@@ -83,9 +86,10 @@ class NewBetPage extends PageRoute<void> {
   static void addNewBet(BuildContext context) {
     Navigator.push<void>(
       context,
-      NewBetPage(builder: (_) =>  NewBetForm(
+      NewBetPage(builder: (_) => BetForm(
         appContext: context,
         onDone: () => _close(context),
+        inputSize: InputSize.big,
       )),
     );
   }

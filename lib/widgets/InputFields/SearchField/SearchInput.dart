@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
-import 'package:long_term_bets/widgets/InputFields/FieldDecoration.dart';
+import 'package:long_term_bets/widgets/InputFields/BasicInput/FieldDecoration.dart';
+import 'package:long_term_bets/widgets/InputFields/BasicInput/Input.dart';
 import 'package:long_term_bets/widgets/InputFields/SearchField/SearchList.dart';
 
 class SearchInputState extends State<SearchInput> {
@@ -10,25 +11,32 @@ class SearchInputState extends State<SearchInput> {
   dynamic _selected;
 
   @override
+  void initState() {
+    super.initState();
+    _selected = widget.initalSelected;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         TextField(
           minLines: 1,
-          controller: _isSelected() ? TextEditingController(text: widget.value) : null,
+          controller: _isSelected() ? TextEditingController(text: widget.textValue) : null,
           maxLines: 1,
           onChanged: _filterResults,
           cursorColor: AppColors.textInput,
-          style: TextStyles.inputStyle,
+          style: TextStyles.inputStyle(widget.inputSize),
           focusNode: widget.focusNode,
           buildCounter: _showSelected,
-          autofocus: true,
+          autofocus: widget.initalSelected == null,
           onTap: _onTap,
           textCapitalization: TextCapitalization.sentences,
           decoration: FieldDecoration(
             labelText: widget.labelText,
             hintText: widget.hintText,
             icon: widget.icon,
+            inputSize: widget.inputSize,
           ),
         ),
         Expanded(
@@ -88,7 +96,9 @@ class SearchInput extends StatefulWidget {
     @required this.buildFn,
     @required this.onSelect,
     @required this.filterFn,
-    @required this.value,
+    @required this.textValue,
+    @required this.inputSize,
+    this.initalSelected,
   });
 
   final FocusNode focusNode;
@@ -96,9 +106,11 @@ class SearchInput extends StatefulWidget {
   final String labelText;
   final String hintText;
   final IconData icon;
-  final String value;
+  final String textValue;
+  final dynamic initalSelected;
   final Function buildFn;
   final Function onSelect;
+  final InputSize inputSize;
   final Future<List<dynamic>> Function(String) filterFn;
 
   @override

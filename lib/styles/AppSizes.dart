@@ -9,6 +9,7 @@ class AppSizes {
   static double bigElevation = 8.0;
   static double elevation = 4.0;
   static double smallElevation = 2.0;
+  static double noElevation = 0.0;
   static double iconSpacing = 2.0;
   static double bigTitleDividerPadding = 12.0;
   static double smallTitleDividerPadding = 6.0;
@@ -21,4 +22,6 @@ class AppSizes {
   static double bigImage = 300.0;
   static double mediumImage = 180.0;
   static double smallLoaderSize = 20.0;
+  static double modalSizeWithKeyboard = 500.0;
+  static double modalSizeWithoutKeyboard = 300.0;
 }

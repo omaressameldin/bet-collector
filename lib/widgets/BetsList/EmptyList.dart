@@ -6,7 +6,6 @@ import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 class EmptyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget> [
