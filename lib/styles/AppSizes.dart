@@ -15,13 +15,18 @@ class AppSizes {
   static double smallTitleDividerPadding = 6.0;
   static double smallAvatar = 7.5;
   static double mediumAvatar = 10.0;
+  static double hugeAvatar = 50.0;
   static double bigAvatar = 20.0;
   static double bigIconSize = 50.0;
   static double mediumIconSize = 30.0;
+  static double appBarIconSize = 20.0;
+  static double appBarSize = 50.0;
   static double smallIconSize = 15.0;
   static double bigImage = 300.0;
   static double mediumImage = 180.0;
   static double smallLoaderSize = 20.0;
   static double modalSizeWithKeyboard = 500.0;
   static double modalSizeWithoutKeyboard = 300.0;
+  static double chartSize = 150.0;
+  static int chartWidth = 20;
 }

@@ -9,7 +9,9 @@ import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 import 'package:long_term_bets/widgets/BetsList/BetsList.dart';
+import 'package:long_term_bets/widgets/MainBar/MainBar.dart';
 import 'package:long_term_bets/widgets/NewBet/NewBetPage.dart';
+import 'package:long_term_bets/widgets/Dashboard/Dashboard.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
 
@@ -30,11 +32,16 @@ class MyApp extends StatelessWidget with BetsProvider {
 
 class NavigationState extends State<Navigation> with BetterConsumer {
   int _currentIndex = 0;
+  bool _isSearching = false;
+  static const int TOTAL_NUMBER_OF_TABS = 5;
+  static const int PROFILE_TAB_INDEX = 4;
+
   final List<Widget> _children = <Widget>[
     BetsList(betsType: BetsType.all),
     BetsList(betsType: BetsType.running),
     BetsList(betsType: BetsType.won),
     BetsList(betsType: BetsType.lost),
+    Dashboard(),
   ];
 
   @override
@@ -42,19 +49,14 @@ class NavigationState extends State<Navigation> with BetterConsumer {
     final Better better = consumeBetter(context);
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: AppSizes.bigElevation,
-        title: const Text('Long Term Bets'),
-        backgroundColor: AppColors.primary,
+      appBar: MainBar(
+        currentIndex: _currentIndex,
+        isSearching: _isSearching,
+        toggleSearch: _toggleSearch,
+        onSearchChange: _filterResults,
       ),
-      body:  _children[_currentIndex % 4],
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: AppSizes.elevation,
-        backgroundColor: AppColors.funky,
-        icon: const Icon(Icons.add),
-        label: const Text('Add new'),
-        onPressed: () => NewBetPage.addNewBet(context),
-      ),
+      body:  _children[_currentIndex % TOTAL_NUMBER_OF_TABS],
+      floatingActionButton: _renderFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         elevation: AppSizes.bigElevation,
@@ -96,9 +98,31 @@ class NavigationState extends State<Navigation> with BetterConsumer {
     );
   }
 
+  void _toggleSearch() => setState(() => _isSearching = !_isSearching);
+
+  void _filterResults() {}
+
+  Widget _renderFab() {
+    if (_currentIndex == PROFILE_TAB_INDEX) {
+      return null;
+    }
+
+    return FloatingActionButton.extended(
+      heroTag: null,
+      elevation: AppSizes.elevation,
+      backgroundColor: AppColors.funky,
+      icon: const Icon(Icons.add),
+      label: const Text('Add new'),
+      onPressed: () => NewBetPage.addNewBet(context),
+    );
+  }
+
   void onTabTapped(int index) {
    setState(() {
      _currentIndex = index;
+     if (index == PROFILE_TAB_INDEX) {
+       _isSearching = false;
+     }
    });
  }
 }
