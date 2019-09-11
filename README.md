@@ -20,20 +20,6 @@
 - Run `flutter run`
 
 ## Screenshots
-<!-- ### Viewing different bet states
-![bet-states](./readme-gifs/bet_states.gif)
-### Create a new Bet
-![bet-create](./readme-gifs/bet_create.gif)
-### Viewing Bet Details
-![bet-details](./readme-gifs/bet_details.gif)
-### Change Bet state
-![bet-state-change](./readme-gifs/bet_state-change.gif)
-### Delete Bet
-![bet-delete](./readme-gifs/bet_delete.gif)
-### Edit an existing Bet
-![bet-edit](./readme-gifs/bet_edit.gif)
-### View Profile
-![bet-profile](./readme-gifs/bet_profile.gif) -->
 
 Viewing different bet states | View Profile
 --- | ---
