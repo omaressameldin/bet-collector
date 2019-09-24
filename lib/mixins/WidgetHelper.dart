@@ -61,7 +61,7 @@ mixin WidgetHelper {
     ).toList();
 
     actionButtons.add(ActionButton(
-      isFlat: true,
+      shape: ButtonShape.flat,
       onPressed: dismissAlert,
       text: 'Discard',
       color: AppColors.transparent,

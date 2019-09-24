@@ -126,7 +126,7 @@ class BetFormState extends State<BetForm> with BetterConsumer, BetsConsumer {
     final String buttonText = _step < _maxStep ? 'Next Step' : doneButtonText;
 
     return ActionButton(
-      isFlat: true,
+      shape: ButtonShape.flat,
       hasPadding: false,
       isReversed: true,
       isBig: true,
@@ -142,7 +142,7 @@ class BetFormState extends State<BetForm> with BetterConsumer, BetsConsumer {
       'Discard';
 
     return ActionButton(
-      isFlat: true,
+      shape: ButtonShape.flat,
       hasPadding: false,
       isBig: true,
       onPressed: _prevStep,
