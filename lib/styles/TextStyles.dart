@@ -22,6 +22,13 @@ class TextStyles {
     fontSize: 20.0
   );
 
+  static TextStyle signInTitleStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColors.funky,
+    fontSize: 40.0,
+    fontFamily: 'Billy Country'
+  );
+
   static TextStyle detailsStyle = TextStyle(
     fontWeight: FontWeight.bold,
     color: AppColors.cardText,
