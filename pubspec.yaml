@@ -55,6 +55,15 @@ flutter:
   assets:
    - assets/images/empty.png
    - assets/images/money-panda.png
+   - assets/images/signin.png
+  fonts:
+    - family: Billy Country
+      fonts:
+        - asset: assets/fonts/Countryside-YdKj.ttf
+          weight: 700
+    - family: Billy Vegan
+      fonts:
+        - asset: assets/fonts/VeganStylePersonalUse-5Y58.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
