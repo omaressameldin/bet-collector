@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:long_term_bets/widgets/LoggedInPage/LoggedInPage.dart';
+
 mixin WidgetHelper {
   Container buildDividedContainer(bool isBig, Widget child, {bool isLast = false}) {
     final double rightPadding = isBig ?
@@ -89,5 +93,20 @@ mixin WidgetHelper {
       action: action,
     );
     Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  void signOutGoogle(BuildContext context) async{
+    await GoogleSignIn().signOut();
+    Navigator.of(context).pop();
+  }
+
+  void afterSiginIn(BuildContext context, FirebaseUser user) {
+    Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) {
+          return LoggedInPage(currentUser: user);
+        },
+      ),
+    );
   }
 }
