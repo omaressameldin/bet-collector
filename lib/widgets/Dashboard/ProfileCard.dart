@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Better.dart';
+import 'package:long_term_bets/mixins/WidgetHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
@@ -13,7 +14,8 @@ import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 
 class ProfileCardState extends State<ProfileCard> with
   TickerProviderStateMixin,
-  BetterConsumer
+  BetterConsumer,
+  WidgetHelper
 {
 
   Better _better;
@@ -31,7 +33,7 @@ class ProfileCardState extends State<ProfileCard> with
     _buildControllers();
 
     return SlideAnimation(
-      child: _betCard(),
+      child: _betCard(context),
       begin: const Offset(0, -4),
       end: const Offset(0, 0),
       curve: Curves.decelerate,
@@ -63,7 +65,7 @@ class ProfileCardState extends State<ProfileCard> with
     });
   }
 
-  Widget _betCard() {
+  Widget _betCard(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0)
@@ -80,7 +82,7 @@ class ProfileCardState extends State<ProfileCard> with
           child: Column(
             children: <Widget>[
               _renderProfile(),
-              _renderActions(),
+              _renderActions(context),
             ],
           ),
         )
@@ -116,7 +118,7 @@ class ProfileCardState extends State<ProfileCard> with
     );
   }
 
-  Widget _renderActions() {
+  Widget _renderActions(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +135,7 @@ class ProfileCardState extends State<ProfileCard> with
           AppColors.buttonText,
           'Log out',
           _logoutController,
-          (){},
+          () => signOutGoogle(context),
         ),
       ],
     );

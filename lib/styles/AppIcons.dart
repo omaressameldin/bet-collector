@@ -24,4 +24,5 @@ class AppIcons {
   static IconData friends = MdiIcons.accountGroup;
   static IconData logout = MdiIcons.logout;
   static IconData betCreationStats = MdiIcons.clock;
+  static IconData google = MdiIcons.google;
 }
