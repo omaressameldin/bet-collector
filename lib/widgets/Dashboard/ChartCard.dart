@@ -86,7 +86,7 @@ class ChartCard extends StatelessWidget {
         ),
       ],
     animate: true,
-    animationDuration: Duration(milliseconds: 700),
+    animationDuration: const Duration(milliseconds: 700),
     defaultRenderer: ArcRendererConfig<String>(arcWidth: AppSizes.chartWidth),
     );
   }
