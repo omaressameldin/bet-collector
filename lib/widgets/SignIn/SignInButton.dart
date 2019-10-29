@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
-import 'package:long_term_bets/mixins/WidgetHelper.dart';
+import 'package:long_term_bets/mixins/LoginHelepr.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class SignInButton extends StatelessWidget with WidgetHelper {
+class SignInButton extends StatelessWidget with LoginHelper {
   const SignInButton();
 
   @override
@@ -41,6 +41,6 @@ class SignInButton extends StatelessWidget with WidgetHelper {
 
     final FirebaseUser currentUser = await auth.currentUser();
     assert(user.uid == currentUser.uid);
-    afterSiginIn(context, user);
+    whenLoggingIn(context, user);
   }
 }

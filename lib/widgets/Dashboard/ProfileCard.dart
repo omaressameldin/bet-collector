@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Better.dart';
-import 'package:long_term_bets/mixins/WidgetHelper.dart';
+import 'package:long_term_bets/mixins/LoginHelepr.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
@@ -15,7 +15,7 @@ import 'package:long_term_bets/widgets/Avatar/Avatar.dart';
 class ProfileCardState extends State<ProfileCard> with
   TickerProviderStateMixin,
   BetterConsumer,
-  WidgetHelper
+  LoginHelper
 {
 
   Better _better;

@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
-import 'package:long_term_bets/data/Bets.dart';
+import 'package:long_term_bets/consumers/BetterConsumer.dart';
 import 'package:long_term_bets/data/Better.dart';
-import 'package:long_term_bets/providers/BetsProvider.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
@@ -14,11 +12,10 @@ import 'package:long_term_bets/widgets/NewBet/NewBetPage.dart';
 import 'package:long_term_bets/widgets/Dashboard/Dashboard.dart';
 import 'package:long_term_bets/widgets/Translucent/Translucent.dart';
 
-class LoggedInPageState extends State<LoggedInPage> with BetsProvider {
+class LoggedInPageState extends State<LoggedInPage> with BetterConsumer {
   int _currentIndex = 0;
   bool _isSearching = false;
   Better _better;
-  Bets _bets;
 
   static const int TOTAL_NUMBER_OF_TABS = 5;
   static const int PROFILE_TAB_INDEX = 4;
@@ -32,18 +29,14 @@ class LoggedInPageState extends State<LoggedInPage> with BetsProvider {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _bets = Bets();
-    _better = _bets.getLoggedInBetter();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _better = consumeBetter(context);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return provideBets(_bets, _better, buildPage());
-  }
 
-  Widget buildPage() {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainBar(
         currentIndex: _currentIndex,
@@ -124,8 +117,6 @@ class LoggedInPageState extends State<LoggedInPage> with BetsProvider {
 }
 
 class LoggedInPage extends StatefulWidget {
-  const LoggedInPage({ @required this.currentUser });
-  final FirebaseUser currentUser;
 
   @override
   LoggedInPageState createState() => LoggedInPageState();

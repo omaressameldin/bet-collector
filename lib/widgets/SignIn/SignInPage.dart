@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:long_term_bets/mixins/WidgetHelper.dart';
+import 'package:long_term_bets/mixins/LoginHelepr.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Animations/Animation.dart';
@@ -11,7 +11,7 @@ import 'package:long_term_bets/widgets/SignIn/SignInButton.dart';
 
 class SignInPageState extends State<SignInPage> with
   TickerProviderStateMixin,
-  WidgetHelper
+  LoginHelper
 {
 
   AnimationController _imageController;
@@ -76,7 +76,7 @@ class SignInPageState extends State<SignInPage> with
     final FirebaseUser currentUser = await auth.currentUser();
 
     if(await currentUser.getIdToken() != null) {
-      afterSiginIn(context, currentUser);
+      whenLoggingIn(context, currentUser);
     }
   }
 }
