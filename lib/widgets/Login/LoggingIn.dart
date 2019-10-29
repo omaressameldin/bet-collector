@@ -15,5 +15,4 @@ class LoggingIn extends StatelessWidget with BetsProvider {
 
     return provideBets(bets, bets.getLoggedInBetter(), LoggedInPage());
   }
-
 }
