@@ -13,7 +13,7 @@ mixin QueriesHelper {
   }
 
   static String loginUser(String token) {
-    return """
+    return '''
       mutation{
         loginUser(input: {
           api: "v1",
@@ -27,6 +27,6 @@ mixin QueriesHelper {
           }
         }
       }
-    """;
+    ''';
   }
 }

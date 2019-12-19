@@ -6,49 +6,49 @@ List<Better> betters = <Better>[
     email: 'test@test.test',
     id: '1',
     name: 'Shadwa',
-    avatar: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
+    avatar: const NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
   ),
   Better(
     email: 'test@test.test',
     id: '2',
     name: 'Omar',
-    avatar: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
+    avatar: const NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
   ),
   Better(
     email: 'test@test.test',
     id: '3',
     name: 'Aley',
-    avatar: NetworkImage('https://banner2.kisspng.com/20180626/fhs/kisspng-avatar-user-computer-icons-software-developer-5b327cc98b5780.5684824215300354015708.jpg')
+    avatar: const NetworkImage('https://banner2.kisspng.com/20180626/fhs/kisspng-avatar-user-computer-icons-software-developer-5b327cc98b5780.5684824215300354015708.jpg')
   ),
   Better(
     email: 'test@test.test',
     id: '3',
     name: 'Mody',
-    avatar: NetworkImage('http://www.sclance.com/pngs/avatar-icon-png/avatar_icon_png_70847.jpg')
+    avatar: const NetworkImage('http://www.sclance.com/pngs/avatar-icon-png/avatar_icon_png_70847.jpg')
   ),
   Better(
     email: 'test@test.test',
     id: '1',
     name: 'Mehany',
-    avatar: NetworkImage('https://img.pngio.com/child-avatar-icon-flat-design-red-yellow-coffee-avatar-png-693_720.png'),
+    avatar: const NetworkImage('https://img.pngio.com/child-avatar-icon-flat-design-red-yellow-coffee-avatar-png-693_720.png'),
   ),
   Better(
     email: 'test@test.test',
     id: '2',
     name: 'Hariry',
-    avatar: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
+    avatar: const NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
   ),
   Better(
     email: 'test@test.test',
     id: '3',
     name: 'sharkawy',
-    avatar: NetworkImage('http://kepido.com/protected/modules/singlemerchant/assets/images/avatar.png')
+    avatar: const NetworkImage('http://kepido.com/protected/modules/singlemerchant/assets/images/avatar.png')
   ),
   Better(
     email: 'test@test.test',
     id: '3',
     name: 'Mody',
-    avatar: NetworkImage('http://www.sclance.com/pngs/avatar-icon-png/avatar_icon_png_70847.jpg')
+    avatar: const NetworkImage('http://www.sclance.com/pngs/avatar-icon-png/avatar_icon_png_70847.jpg')
   ),
 ];
 

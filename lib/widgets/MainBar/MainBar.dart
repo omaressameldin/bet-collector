@@ -19,7 +19,7 @@ class MainBar extends StatelessWidget with PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
-    final Color appBarColor = AppColors.white ;
+    const Color appBarColor = AppColors.white ;
 
     return AppBar(
       centerTitle: false,

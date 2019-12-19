@@ -15,7 +15,7 @@ mixin GraphQLClientProvider {
 
     // final Link link = authLink.concat(httpLink);
 
-    final ValueNotifier<GraphQLClient> client = ValueNotifier(
+    final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
       GraphQLClient(
         cache: InMemoryCache(),
         link: httpLink,

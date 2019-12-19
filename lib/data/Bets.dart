@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Better.dart';
 // TODO: Remove once backend is connected
 Better better1 = Better(
+  email: 'test@test.test',
   id: '1',
   name: 'Shadwa',
-  avatar: NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
+  avatar: const NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
 );
 Better better2 = Better(
+  email: 'test@test.test',
   id: '2',
   name: 'Omar',
-  avatar: NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
+  avatar: const NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
 );
 
 // TODO: Remove once backend is connected
