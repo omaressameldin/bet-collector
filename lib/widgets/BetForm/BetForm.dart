@@ -93,7 +93,9 @@ class BetFormState extends State<BetForm> with BetterConsumer, BetsConsumer {
   }
 
   Widget _renderField() {
-    FocusScope.of(context).requestFocus(_focusNode);
+    if (widget.bet == null) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    }
     switch(_step) {
       case 1: return AddDescription(
         setDescription: setDescription,
