@@ -20,10 +20,15 @@ mixin LoginHelper {
     Navigator.of(context).pop();
   }
 
-  Future<Better> getLoggedInUser(BuildContext context) async{
+  static Future<String> getIDToken() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser currentUser = await auth.currentUser();
-    final String token = await currentUser.getIdToken();
+
+    return await currentUser.getIdToken();
+  }
+
+  Future<Better> getLoggedInUser(BuildContext context) async{
+    final String token = await getIDToken();
 
      if(token != null) {
       return await Better.login(context, token);
