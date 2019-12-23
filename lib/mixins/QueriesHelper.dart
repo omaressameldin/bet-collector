@@ -29,4 +29,21 @@ mixin QueriesHelper {
       }
     ''';
   }
+
+  static String readAllUsers(String token) {
+    return '''
+      query {
+        readAllUsers(input: {
+          api: "v1",
+          token: "$token"
+        }){
+          users {
+            email
+            name
+            avatar
+            id
+          }
 }
+      }
+    ''';
+  }

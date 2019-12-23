@@ -30,7 +30,7 @@ class AddBetter extends StatelessWidget {
       icon: AppIcons.better,
       validationFn: _validatePayment,
       buildFn : _buildResult,
-      filterFn: _filterBetters,
+      filterFn: (String input) => _filterBetters(context, input),
       onSelect: setBetter,
       initalSelected: better,
       textValue: better != null ? better.name : null,
@@ -38,8 +38,8 @@ class AddBetter extends StatelessWidget {
     );
   }
 
-  Future<List<Better>> _filterBetters(String input) {
-    return Better.filterBetters(input);
+  Future<List<Better>> _filterBetters(BuildContext context, String input) async{
+    return Better.filterBetters(context, input);
   }
 
   String _validatePayment(Better value) {
