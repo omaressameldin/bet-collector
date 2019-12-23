@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:long_term_bets/data/Bets.dart';
 
 mixin QueriesHelper {
 
@@ -43,7 +44,27 @@ mixin QueriesHelper {
             avatar
             id
           }
-}
+        }
       }
     ''';
   }
+
+  static String createBet(String token, Bet bet) {
+    return '''
+      mutation{
+        createBet(input: {
+          api:"v1",
+          token: "$token",
+          bet: {
+            description: "${bet.description}",
+            payment: "${bet.payment}",
+            accepter_id: "${bet.accepter.id}",
+            expiry_date: { seconds: ${bet.timeInSeconds()} }
+          }
+        }) {
+          id
+        }
+      }
+    ''';
+  }
+}

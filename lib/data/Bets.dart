@@ -1,25 +1,12 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:long_term_bets/data/Better.dart';
-// TODO: Remove once backend is connected
-Better better1 = Better(
-  email: 'test@test.test',
-  id: '1',
-  name: 'Shadwa',
-  avatar: const NetworkImage('https://listimg.pinclipart.com/picdir/s/335-3356471_female-avatar-girls-avatar-clipart.png'),
-);
-Better better2 = Better(
-  email: 'test@test.test',
-  id: '2',
-  name: 'Omar',
-  avatar: const NetworkImage('https://cdn0.iconfinder.com/data/icons/iconshock_guys/512/andrew.png'),
-);
+import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/mixins/QueriesHelper.dart';
 
-// TODO: Remove once backend is connected
-List<Bet> bets = <Bet>[];
-
-class Bets with ChangeNotifier {
+class Bets with ChangeNotifier, LoginHelper {
 
   final HashSet<Bet> _allBets = HashSet<Bet>();
   final HashSet<Bet> _wonBets = HashSet<Bet>();
@@ -38,20 +25,15 @@ class Bets with ChangeNotifier {
     notifyListeners();
   }
 
-  // TODO: Remove once backend is connected
-  Better getLoggedInBetter() {
-    return better2;
-  }
-
   void markAsCompleted(Bet bet, Better winner) {
     if(_allBets.contains(bet)) {
       bet._markAsCompleted(winner);
       _runningBets.remove(bet);
-      if (winner == getLoggedInBetter()) {
-        _wonBets.add(bet);
-      } else {
-        _lostBets.add(bet);
-      }
+      // if (winner == getLoggedInBetter()) {
+      //   _wonBets.add(bet);
+      // } else {
+      //   _lostBets.add(bet);
+      // }
     } else {
       throw Exception('Only running bets can be marked as completed');
     }
@@ -84,17 +66,14 @@ class Bets with ChangeNotifier {
   }
 
 
-  void add(Bet bet, Better currentUser, {int index = -1}) {
+  Future<void> add(BuildContext context, Bet bet) async {
+    final String token = await LoginHelper.getIDToken();
+      final QueryResult res = await QueriesHelper.makeQuery(
+      context, QueriesHelper.createBet(token, bet)
+    );
+    final String betId =res.data['createBet']['id'];
+    bet.id = betId;
     _allBets.add(bet);
-    if(bet.isCompleted()) {
-      if (bet.winner == currentUser) {
-        _wonBets.add(bet);
-      } else {
-        _lostBets.add(bet);
-      }
-    } else {
-      _runningBets.add(bet);
-    }
 
     notifyListeners();
   }
@@ -102,7 +81,6 @@ class Bets with ChangeNotifier {
 
 class Bet with ChangeNotifier {
   Bet({
-    @required this.id,
     @required this.better,
     @required Better accepter,
     @required String description,
@@ -119,7 +97,7 @@ class Bet with ChangeNotifier {
     _accepter = accepter;
   }
 
-  final String id;
+  String id;
   final Better better;
   Better _accepter;
   String _description;
@@ -169,6 +147,10 @@ class Bet with ChangeNotifier {
     } else {
       return better;
     }
+  }
+
+  int timeInSeconds() {
+    return (expiryDate.millisecondsSinceEpoch/1000).round();
   }
 
   void editBetInfo({

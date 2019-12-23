@@ -180,10 +180,9 @@ class BetFormState extends State<BetForm> with BetterConsumer, BetsConsumer {
       payment: _payment,
       expiryDate: _expiry,
       accepter: _better,
-      id: '${bets.allBets.length}' //TODO: needs to be dynamic from backend!
     );
 
-    bets.add(bet, currentUser);
+    bets.add(context, bet);
   }
 
   void _updatet() {
