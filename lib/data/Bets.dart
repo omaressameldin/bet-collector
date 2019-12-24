@@ -99,16 +99,22 @@ class Bets with ChangeNotifier, LoginHelper {
   }
 
   Future<void> delete(BuildContext context, Bet bet) async {
+    final GraphQLClient client = QueriesHelper.getClient(context);
+
     _runningBets.remove(bet);
     _wonBets.remove(bet);
     _lostBets.remove(bet);
     _allBets.remove(bet);
     notifyListeners();
 
-    await Future<void>.delayed(const Duration(seconds: 5), () async {
+    await Future<void>.delayed(const Duration(seconds: 7), () async {
+      // check if undo is clicked
+      if (_allBets.contains(bet)) {
+        return;
+      }
       final String token = await LoginHelper.getIDToken();
       final QueryResult res = await QueriesHelper.makeQuery(
-        context, QueriesHelper.deleteBet(token, bet)
+        client, QueriesHelper.deleteBet(token, bet)
       );
       if (res.hasErrors) {
         final GraphQLError error =res.errors.toList()[0];
@@ -130,16 +136,40 @@ class Bets with ChangeNotifier, LoginHelper {
 
 
   Future<void> add(BuildContext context, Bet bet) async {
+    final GraphQLClient client = QueriesHelper.getClient(context);
     final String token = await LoginHelper.getIDToken();
     final QueryResult res = await QueriesHelper.makeQuery(
-      context, QueriesHelper.createBet(token, bet)
+      client, QueriesHelper.createBet(token, bet)
     );
     final String betId =res.data['createBet']['id'];
     bet._id = betId;
     bet._createdAt = DateTime.now();
     _allBets.add(bet);
-
+    _runningBets.add(bet);
     notifyListeners();
+  }
+
+  Function undoDeleteFn(BuildContext context, Bet bet)  {
+    final Future<Better> userFuture = LoginHelper.getLoggedInUser(context);
+
+    return () async {
+      final Better user = await userFuture;
+
+      if (_allBets.contains(bet)) {
+        return;
+      }
+      _allBets.add(bet);
+      if (bet.isCompleted()) {
+        if (bet.winner == user) {
+          _wonBets.add(bet);
+        } else {
+          _lostBets.add(bet);
+        }
+      } else {
+        _runningBets.add(bet);
+      }
+      notifyListeners();
+    };
   }
 }
 

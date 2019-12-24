@@ -29,10 +29,11 @@ class Better with QueriesHelper, LoginHelper {
     if (input.isEmpty) {
       return Future<List<Better>>(() => <Better>[]);
     }
-    final String token = await LoginHelper.getIDToken();
 
+    final GraphQLClient client = QueriesHelper.getClient(context);
+    final String token = await LoginHelper.getIDToken();
     final QueryResult res = await QueriesHelper.makeQuery(
-      context, QueriesHelper.readAllUsers(token)
+      client, QueriesHelper.readAllUsers(token)
     );
     final List<dynamic> usersResult =res.data['readAllUsers']['users'];
 
@@ -49,8 +50,9 @@ class Better with QueriesHelper, LoginHelper {
   }
 
   static Future<Better> login(BuildContext context, String token) async {
+  final GraphQLClient client = QueriesHelper.getClient(context);
   final QueryResult res = await QueriesHelper.makeQuery(
-    context, QueriesHelper.loginUser(token)
+    client, QueriesHelper.loginUser(token)
   );
   final Map<String, dynamic> userResult =res.data['loginUser']['user'];
 

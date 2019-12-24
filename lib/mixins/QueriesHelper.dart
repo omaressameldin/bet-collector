@@ -4,8 +4,9 @@ import 'package:long_term_bets/data/Bets.dart';
 
 mixin QueriesHelper {
 
-  static Future<QueryResult> makeQuery(BuildContext context, String document) async {
-    final GraphQLClient client = GraphQLProvider.of(context).value;
+  static GraphQLClient getClient(BuildContext context) => GraphQLProvider.of(context).value;
+
+  static Future<QueryResult> makeQuery(GraphQLClient client, String document) async {
     final QueryResult res = await client.mutate(MutationOptions(
       document: document
     ));

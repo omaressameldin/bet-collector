@@ -21,10 +21,10 @@ class LoggedInPageState extends State<LoggedInPage> with BetterConsumer {
   static const int PROFILE_TAB_INDEX = 4;
 
   final List<Widget> _children = <Widget>[
-    BetsList(betsType: BetsType.all),
-    BetsList(betsType: BetsType.running),
-    BetsList(betsType: BetsType.won),
-    BetsList(betsType: BetsType.lost),
+    const BetsList(betsType: BetsType.all),
+    const BetsList(betsType: BetsType.running),
+    const BetsList(betsType: BetsType.won),
+    const BetsList(betsType: BetsType.lost),
     Dashboard(),
   ];
 
