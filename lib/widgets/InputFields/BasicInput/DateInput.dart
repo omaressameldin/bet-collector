@@ -5,7 +5,7 @@ import 'package:long_term_bets/widgets/InputFields/BasicInput/Input.dart';
 
 
 abstract class DateInput extends Input {
-  DateInput({
+  const DateInput({
     @required this.initialValue,
     @required FocusNode focusNode,
     @required String labelText,

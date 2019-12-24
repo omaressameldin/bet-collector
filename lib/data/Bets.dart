@@ -65,7 +65,7 @@ class Bets with ChangeNotifier, LoginHelper {
 
   void markAsCompleted(BuildContext context, Bet bet, Better winner) async {
     if(!_allBets.contains(bet)) {
-      throw Exception('Only running bets can be marked as completed');;
+      throw Exception('Only running bets can be marked as completed');
     }
 
     final GraphQLClient client = QueriesHelper.getClient(context);
@@ -103,7 +103,6 @@ class Bets with ChangeNotifier, LoginHelper {
     }
 
     final GraphQLClient client = QueriesHelper.getClient(context);
-    final Better currentUser = await LoginHelper.getLoggedInUser(context);
     final String token = await LoginHelper.getIDToken();
     final QueryResult res = await QueriesHelper.makeQuery(
       client, QueriesHelper.markAsRunning(
@@ -155,6 +154,7 @@ class Bets with ChangeNotifier, LoginHelper {
             _lostBets.add(bet);
           }
         }
+        throw error;
       }
       notifyListeners();
     });
