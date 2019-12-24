@@ -27,7 +27,7 @@ mixin LoginHelper {
     return await currentUser.getIdToken();
   }
 
-  Future<Better> getLoggedInUser(BuildContext context) async{
+  static Future<Better> getLoggedInUser(BuildContext context) async{
     final String token = await getIDToken();
 
      if(token != null) {

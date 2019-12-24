@@ -72,7 +72,7 @@ class SignInPageState extends State<SignInPage> with
   }
 
   void _checkSignedIn(BuildContext context) async{
-    final Better user = await getLoggedInUser(context);
+    final Better user = await LoginHelper.getLoggedInUser(context);
     if (user != null) {
       whenLoggedIn(context, user);
     }
