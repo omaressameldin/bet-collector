@@ -7,11 +7,14 @@
 
 - The app mainly uses [flutter's own material design widgets](https://flutter.dev/docs/development/ui/widgets/material)
 
-- it's using some Go services for communicating with the database
-- These services are:
-  - User service (not yet implemented)
-  - Bet Service (not yet implemented)
+- it's using some Go and kotlin services for communicating with the database
+- ### These services are:
+  - [GraphQL API Service](https://github.com/omaressameldin/bet-collector-services/tree/master/graphql-api)
+  - [User Service](https://github.com/omaressameldin/bet-collector-services/tree/master/grpc-services/user)
+  - [Bet Service](https://github.com/omaressameldin/bet-collector-services/tree/master/grpc-services/bet)
   - Friends service (not yet implemented)
+- ### To Run all services:
+  - go to [bet-collector-services repo](https://github.com/omaressameldin/bet-collector-services) and follow README
 
 ## How to run
 - Launch all the backend services mentioned in the previous section by Following the corresponding `README.md` file for each service.

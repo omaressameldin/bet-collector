@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
+import 'package:long_term_bets/data/Better.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
-import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/mixins/LoginHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInButton extends StatelessWidget with LoginHelper {
   const SignInButton();
@@ -26,21 +25,8 @@ class SignInButton extends StatelessWidget with LoginHelper {
   }
 
   Future<void> signInWithGoogle(BuildContext context) async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignInAccount googleSignInAccount = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-    final FirebaseUser user = await auth.signInWithCredential(credential);
+    final Better user = await signInUser(context);
 
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-
-    final FirebaseUser currentUser = await auth.currentUser();
-    assert(user.uid == currentUser.uid);
-    whenLoggingIn(context, user);
+    whenLoggedIn(context, user);
   }
 }

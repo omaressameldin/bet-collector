@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/data/Better.dart';
+import 'package:long_term_bets/mixins/LoginHelper.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Animations/Animation.dart';
@@ -72,11 +72,9 @@ class SignInPageState extends State<SignInPage> with
   }
 
   void _checkSignedIn(BuildContext context) async{
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser currentUser = await auth.currentUser();
-
-    if(await currentUser.getIdToken() != null) {
-      whenLoggingIn(context, currentUser);
+    final Better user = await LoginHelper.getLoggedInUser(context);
+    if (user != null) {
+      whenLoggedIn(context, user);
     }
   }
 }

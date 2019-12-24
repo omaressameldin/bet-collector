@@ -25,6 +25,7 @@ class AppSizes {
   static double bigImage = 300.0;
   static double mediumImage = 180.0;
   static double smallLoaderSize = 20.0;
+  static double largeLoaderSize = 50.0;
   static double modalSizeWithKeyboard = 500.0;
   static double modalSizeWithoutKeyboard = 300.0;
   static double chartSize = 150.0;

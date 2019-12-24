@@ -14,7 +14,6 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
   BetterConsumer
 {
   Better _selected;
-  Better _currentUser;
 
   final Color contentColor = AppColors.buttonText;
 
@@ -22,7 +21,6 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
   void initState() {
     super.initState();
     _selected = widget.bet.better;
-    _currentUser = consumeBetter(widget.mainContext);
   }
 
   @override
@@ -53,25 +51,25 @@ abstract class BetActionsState<T extends BetActions> extends State<T> with
   }
 
   void deleteBet() {
-    widget.bets.delete(widget.bet);
+    widget.bets.delete(widget.mainContext, widget.bet);
     showSnackBar(
       'Bet deleted!',
       widget.mainContext,
       action: SnackBarAction(
         label: 'undo',
-        onPressed: () => widget.bets.add(widget.bet, _currentUser),
+        onPressed: widget.bets.undoDeleteFn(widget.mainContext, widget.bet),
       ),
     );
   }
 
   ActionButton _setWinnerButton() {
     final Function pressFn = () {
-      widget.bets.markAsCompleted(widget.bet, _selected);
+      widget.bets.markAsCompleted(widget.mainContext, widget.bet, _selected);
     };
     return createActionButton('Confirm', AppColors.success, AppIcons.betWinner, pressFn);
   }
 
-  void markBetAsRunning() => widget.bets.markAsRunning(widget.bet);
+  void markBetAsRunning() => widget.bets.markAsRunning(widget.mainContext, widget.bet);
 
   void markBetAsDone() {
     final WinnerPicker winnerPicker = WinnerPicker(
