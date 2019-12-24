@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/mixins/LoginHelper.dart';
 import 'package:long_term_bets/mixins/QueriesHelper.dart';
 
 class Better with QueriesHelper, LoginHelper {

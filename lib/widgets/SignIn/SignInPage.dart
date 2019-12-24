@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/Better.dart';
-import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/mixins/LoginHelper.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/styles/TextStyles.dart';
 import 'package:long_term_bets/widgets/Animations/Animation.dart';

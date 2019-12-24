@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:long_term_bets/data/ActionButton.dart';
 import 'package:long_term_bets/data/Better.dart';
 import 'package:long_term_bets/data/IconStyle.dart';
-import 'package:long_term_bets/mixins/LoginHelepr.dart';
+import 'package:long_term_bets/mixins/LoginHelper.dart';
 import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppIcons.dart';
 
