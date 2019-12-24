@@ -6,17 +6,17 @@ import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 import 'package:long_term_bets/widgets/BetsList/EmptyList.dart';
 
-class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
-  BetsList({
-    @required this.betsType,
-  });
-
-  final BetsType betsType;
+class BetsListState extends State<BetsList> with BetsConsumer, BetProvider {
+  bool _shouldRefresh = true;
 
   Widget _buildCards(BuildContext context) {
     return FutureBuilder<List<Bet>>(
-        future:  betsList(context, betsType),
+        future:  betsList(context, widget.betsType, _shouldRefresh),
         builder: (BuildContext context, AsyncSnapshot<List<Bet>> snapshot) {
+          if (_shouldRefresh) {
+            setState(() => _shouldRefresh = false);
+          }
+
           if (!snapshot.hasData || snapshot.data.isEmpty) {
             return EmptyList();
           }
@@ -41,4 +41,15 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
   Widget build(BuildContext context) {
     return _buildCards(context);
   }
+}
+
+class BetsList extends StatefulWidget {
+  const BetsList({
+    @required this.betsType,
+  });
+
+  final BetsType betsType;
+
+  @override
+  State<BetsList> createState() => BetsListState();
 }
