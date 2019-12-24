@@ -8,14 +8,55 @@ import 'package:long_term_bets/mixins/QueriesHelper.dart';
 
 class Bets with ChangeNotifier, LoginHelper {
 
-  final HashSet<Bet> _allBets = HashSet<Bet>();
+  List<Bet> _allBets = <Bet>[];
   final HashSet<Bet> _wonBets = HashSet<Bet>();
   final HashSet<Bet> _lostBets = HashSet<Bet>();
   final HashSet<Bet> _runningBets = HashSet<Bet>();
 
+  List<Bet> sortBets(List<Bet> bets) {
+    bets.sort((Bet a, Bet  b) => a.createdAt.compareTo(b.createdAt));
+    return bets;
+  }
 
+  Future<List<Bet>> allBets(BuildContext context) async {
+    if (_allBets.isNotEmpty) {
+      return sortBets(_allBets);
+    }
 
-  HashSet<Bet> get allBets => _allBets;
+    final String token = await LoginHelper.getIDToken();
+    final QueryResult res = await QueriesHelper.makeQuery(
+      context, QueriesHelper.readAllBets(token)
+    );
+    final List<dynamic> betsResult =res.data['readAllBets']['bets'];
+     _allBets = betsResult.map((dynamic bet) => Bet(
+      id: bet['id'],
+      description: bet['description'],
+      payment: bet['payment'],
+      accepter: Better(
+        id: bet['accepter']['id'],
+        avatar: NetworkImage(bet['accepter']['avatar']),
+        email: bet['accepter']['email'],
+        name: bet['accepter']['name']
+      ),
+      better: Better(
+        id: bet['better']['id'],
+        avatar: NetworkImage(bet['better']['avatar']),
+        email: bet['better']['email'],
+        name: bet['better']['name']
+      ),
+      expiryDate: DateTime.fromMillisecondsSinceEpoch(
+        bet['expiryDate']['seconds'] * 1000
+      ),
+      completionDate: DateTime.fromMillisecondsSinceEpoch(
+        bet['completionDate']['seconds'] * 1000
+      ),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(
+        bet['createdAt']['seconds'] * 1000
+      ),
+    )).toList();
+
+    return sortBets(_allBets);
+  }
   HashSet<Bet> get wonBets => _wonBets;
   HashSet<Bet> get lostBets => _lostBets;
   HashSet<Bet> get runningBets => _runningBets;
@@ -56,23 +97,45 @@ class Bets with ChangeNotifier, LoginHelper {
     notifyListeners();
   }
 
-  void delete(Bet bet) {
-    _allBets.remove(bet);
+  Future<void> delete(BuildContext context, Bet bet) async {
+    _runningBets.remove(bet);
     _wonBets.remove(bet);
     _lostBets.remove(bet);
-    _runningBets.remove(bet);
-
+    _allBets.remove(bet);
     notifyListeners();
+
+    await Future<void>.delayed(const Duration(seconds: 5), () async {
+      final String token = await LoginHelper.getIDToken();
+      final QueryResult res = await QueriesHelper.makeQuery(
+        context, QueriesHelper.deleteBet(token, bet)
+      );
+      if (res.hasErrors) {
+        final GraphQLError error =res.errors.toList()[0];
+        _allBets.add(bet);
+        if (bet.completionDate == null) {
+          _runningBets.add(bet);
+        } else {
+          final Better user = await LoginHelper.getLoggedInUser(context);
+          if (user == bet.winner) {
+            _wonBets.add(bet);
+          } else {
+            _lostBets.add(bet);
+          }
+        }
+      }
+      notifyListeners();
+    });
   }
 
 
   Future<void> add(BuildContext context, Bet bet) async {
     final String token = await LoginHelper.getIDToken();
-      final QueryResult res = await QueriesHelper.makeQuery(
+    final QueryResult res = await QueriesHelper.makeQuery(
       context, QueriesHelper.createBet(token, bet)
     );
     final String betId =res.data['createBet']['id'];
-    bet.id = betId;
+    bet._id = betId;
+    bet._createdAt = DateTime.now();
     _allBets.add(bet);
 
     notifyListeners();
@@ -87,7 +150,9 @@ class Bet with ChangeNotifier {
     @required String payment,
     @required DateTime expiryDate,
     DateTime completionDate,
+    DateTime createdAt,
     Better winner,
+    String id,
   }) {
     _payment = payment;
     _description = description;
@@ -95,15 +160,18 @@ class Bet with ChangeNotifier {
     _completionDate = completionDate;
     _winner = winner;
     _accepter = accepter;
+    _id = id;
+    _createdAt = createdAt;
   }
 
-  String id;
   final Better better;
+  String _id;
   Better _accepter;
   String _description;
   String _payment;
   DateTime _expiryDate;
   DateTime _completionDate;
+  DateTime _createdAt;
   Better _winner;
 
 
@@ -115,9 +183,12 @@ class Bet with ChangeNotifier {
   String get description => _description;
   String get payment => _payment;
   DateTime get expiryDate => _expiryDate;
+  DateTime get createdAt => _createdAt;
   DateTime get completionDate => _completionDate;
   Better get winner => _winner;
   Better get accepter => _accepter;
+  String get id => _id;
+
 
   @override
   int get hashCode => id.hashCode;

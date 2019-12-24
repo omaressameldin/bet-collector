@@ -49,6 +49,40 @@ mixin QueriesHelper {
     ''';
   }
 
+    static String readAllBets(String token) {
+    return '''
+      query {
+        readAllBets(input: {
+          api: "v1",
+          token: "$token",
+          limit: -1,
+          page: -1,
+        }){
+          bets {
+            id
+            description
+            payment
+            accepter {
+              email
+              name
+              avatar
+              id
+            }
+            better {
+              email
+              name
+              avatar
+              id
+            }
+            expiryDate { seconds }
+            createdAt { seconds }
+            completionDate { seconds }
+          }
+        }
+      }
+    ''';
+  }
+
   static String createBet(String token, Bet bet) {
     return '''
       mutation{
@@ -63,6 +97,20 @@ mixin QueriesHelper {
           }
         }) {
           id
+        }
+      }
+    ''';
+  }
+
+  static String deleteBet(String token, Bet bet) {
+    return '''
+      mutation{
+        deleteBet(input: {
+          id: "${bet.id}",
+          token: "$token",
+          api: "v1"
+        }){
+          api
         }
       }
     ''';

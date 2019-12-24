@@ -14,22 +14,27 @@ class BetsList extends StatelessWidget with BetsConsumer, BetProvider {
   final BetsType betsType;
 
   Widget _buildCards(BuildContext context) {
-    final List<Bet> betsToShow = betsList(context, betsType);
-    if (betsToShow.isEmpty) {
-      return EmptyList();
-    }
-
-    return ListView.builder(
-        padding: EdgeInsets.all(AppSizes.widgetMargin),
-        itemBuilder: (BuildContext context, int i) {
-          if (i < betsToShow.length) {
-            return provideBet(
-              betsToShow[i],
-              BetCard()
-            );
+    return FutureBuilder<List<Bet>>(
+        future:  betsList(context, betsType),
+        builder: (BuildContext context, AsyncSnapshot<List<Bet>> snapshot) {
+          if (!snapshot.hasData || snapshot.data.isEmpty) {
+            return EmptyList();
           }
-          return null;
-        });
+
+          final List<Bet> bets = snapshot.data;
+          return ListView.builder(
+              padding: EdgeInsets.all(AppSizes.widgetMargin),
+              itemBuilder: (BuildContext context, int i) {
+                if (i < bets.length) {
+                  return provideBet(
+                    bets[i],
+                    BetCard()
+                  );
+                }
+                return null;
+              });
+        },
+      );
   }
 
   @override

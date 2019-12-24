@@ -12,11 +12,11 @@ enum BetsType {
 mixin BetsConsumer {
   Bets consumeBets(BuildContext context) => Provider.of<Bets>(context);
 
-  List<Bet> betsList(BuildContext context, BetsType type) {
+  Future<List<Bet>> betsList(BuildContext context, BetsType type) async {
     final Bets bets = consumeBets(context);
 
     switch(type) {
-      case BetsType.all: return bets.allBets.toList();
+      case BetsType.all: return await bets.allBets(context);
       case BetsType.running: return bets.runningBets.toList();
       case BetsType.won: return bets.wonBets.toList();
       default: return bets.lostBets.toList();
