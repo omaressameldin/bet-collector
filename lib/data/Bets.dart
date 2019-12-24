@@ -63,27 +63,57 @@ class Bets with ChangeNotifier, LoginHelper {
     notifyListeners();
   }
 
-  void markAsCompleted(Bet bet, Better winner) {
-    if(_allBets.contains(bet)) {
-      bet._markAsCompleted(winner);
-      _runningBets.remove(bet);
-      // if (winner == getLoggedInBetter()) {
-      //   _wonBets.add(bet);
-      // } else {
-      //   _lostBets.add(bet);
-      // }
+  void markAsCompleted(BuildContext context, Bet bet, Better winner) async {
+    if(!_allBets.contains(bet)) {
+      throw Exception('Only running bets can be marked as completed');;
+    }
+
+    final GraphQLClient client = QueriesHelper.getClient(context);
+    final Better currentUser = await LoginHelper.getLoggedInUser(context);
+    final String token = await LoginHelper.getIDToken();
+    final QueryResult res = await QueriesHelper.makeQuery(
+      client, QueriesHelper.markAsCompleted(
+        token,
+        bet.id,
+        (DateTime.now().millisecondsSinceEpoch/100).round(),
+        winner.id
+      )
+    );
+
+    if (res.hasErrors) {
+      throw res.errors[0];
+    }
+
+    bet._markAsCompleted(winner);
+    _runningBets.remove(bet);
+    if (winner == currentUser ) {
+      _wonBets.add(bet);
     } else {
-      throw Exception('Only running bets can be marked as completed');
+      _lostBets.add(bet);
     }
 
     notifyListeners();
   }
 
-  void markAsRunning(Bet bet) {
+  void markAsRunning(BuildContext context, Bet bet) async {
     if (!_allBets.contains(bet) ||
       (!_wonBets.contains(bet) && !_lostBets.contains(bet))
     ) {
       throw Exception('Only completed bets can be marked as running');
+    }
+
+    final GraphQLClient client = QueriesHelper.getClient(context);
+    final Better currentUser = await LoginHelper.getLoggedInUser(context);
+    final String token = await LoginHelper.getIDToken();
+    final QueryResult res = await QueriesHelper.makeQuery(
+      client, QueriesHelper.markAsRunning(
+        token,
+        bet.id,
+      )
+    );
+
+    if (res.hasErrors) {
+      throw res.errors[0];
     }
 
     _wonBets.remove(bet);
@@ -137,6 +167,9 @@ class Bets with ChangeNotifier, LoginHelper {
     final QueryResult res = await QueriesHelper.makeQuery(
       client, QueriesHelper.createBet(token, bet)
     );
+    if (res.hasErrors) {
+      throw res.errors[0];
+    }
     final String betId =res.data['createBet']['id'];
     bet._id = betId;
     bet._createdAt = DateTime.now();

@@ -75,6 +75,12 @@ mixin QueriesHelper {
               avatar
               id
             }
+            winner {
+              email
+              name
+              avatar
+              id
+            }
             expiryDate { seconds }
             createdAt { seconds }
             completionDate { seconds }
@@ -98,6 +104,53 @@ mixin QueriesHelper {
           }
         }) {
           id
+        }
+      }
+    ''';
+  }
+
+    static String markAsCompleted(
+      String token,
+      String id,
+      int completionDate,
+      String winnerID,
+    ) {
+    return '''
+      mutation{
+        updateBet(input: {
+          api:"v1",
+          token: "$token",
+          id: "$id",
+          betUpdate: {
+            winner_id: {
+              value: "$winnerID",
+            }
+            completion_date: { seconds: $completionDate }
+          }
+        }) {
+          api
+        }
+      }
+    ''';
+  }
+
+    static String markAsRunning(
+      String token,
+      String id,
+    ) {
+    return '''
+      mutation{
+        updateBet(input: {
+          api:"v1",
+          token: "$token",
+          id: "$id",
+          betUpdate: {
+            winner_id: {
+              value: "",
+            }
+          }
+        }) {
+          api
         }
       }
     ''';
