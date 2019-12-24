@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:long_term_bets/consumers/BetsConsumer.dart';
 import 'package:long_term_bets/data/Bets.dart';
 import 'package:long_term_bets/providers/BetProvider.dart';
+import 'package:long_term_bets/styles/AppColors.dart';
 import 'package:long_term_bets/styles/AppSizes.dart';
 import 'package:long_term_bets/widgets/BetCard/BetCard.dart';
 import 'package:long_term_bets/widgets/BetsList/EmptyList.dart';
 
 class BetsListState extends State<BetsList> with BetsConsumer, BetProvider {
+  Future<List<Bet>> _betsList;
   bool _shouldRefresh = true;
+
+
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    if (!_shouldRefresh) {
+      return;
+    }
+
+    _betsList = betsList(context, widget.betsType);
+    setState(() {
+      _shouldRefresh = false;
+    });
+  }
 
   Widget _buildCards(BuildContext context) {
     return FutureBuilder<List<Bet>>(
-        future:  betsList(context, widget.betsType, _shouldRefresh),
+        future:  _betsList,
         builder: (BuildContext context, AsyncSnapshot<List<Bet>> snapshot) {
-          if (_shouldRefresh) {
-            setState(() => _shouldRefresh = false);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return _dataLoading();
           }
 
-          if (!snapshot.hasData || snapshot.data.isEmpty) {
+          if (!snapshot.hasData) {
             return EmptyList();
           }
+
 
           final List<Bet> bets = snapshot.data;
           return ListView.builder(
@@ -35,6 +53,16 @@ class BetsListState extends State<BetsList> with BetsConsumer, BetProvider {
               });
         },
       );
+  }
+
+  Widget _dataLoading() {
+    return Container(
+      alignment: Alignment.center,
+      child: SpinKitWave(
+        color: AppColors.buttonText,
+        size: AppSizes.largeLoaderSize,
+      ),
+    );
   }
 
   @override
