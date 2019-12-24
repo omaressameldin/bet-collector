@@ -18,11 +18,7 @@ class Bets with ChangeNotifier, LoginHelper {
     return bets;
   }
 
-  Future<List<Bet>> allBets(BuildContext context, bool shouldRefresh) async {
-    if (!shouldRefresh) {
-      return sortBets(_allBets);
-    }
-
+  Future<List<Bet>> allBets(BuildContext context) async {
     final GraphQLClient client = QueriesHelper.getClient(context);
     final String token = await LoginHelper.getIDToken();
     final QueryResult res = await QueriesHelper.makeQuery(
